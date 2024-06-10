@@ -21,6 +21,7 @@
 		84F83E212C15DE120094346C /* NoteUICallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F83E202C15DE120094346C /* NoteUICallback.swift */; };
 		84F83E232C15EA080094346C /* PaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F83E222C15EA080094346C /* PaletteView.swift */; };
 		84F83E252C15EA310094346C /* ConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F83E242C15EA310094346C /* ConfigView.swift */; };
+		84F83E272C17104C0094346C /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F83E262C17104C0094346C /* ColorPalette.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		84F83E202C15DE120094346C /* NoteUICallback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteUICallback.swift; sourceTree = "<group>"; };
 		84F83E222C15EA080094346C /* PaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteView.swift; sourceTree = "<group>"; };
 		84F83E242C15EA310094346C /* ConfigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigView.swift; sourceTree = "<group>"; };
+		84F83E262C17104C0094346C /* ColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				84F83E192C159DDE0094346C /* CountdownTimer.swift */,
+				84F83E262C17104C0094346C /* ColorPalette.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -205,6 +208,7 @@
 				84F83E252C15EA310094346C /* ConfigView.swift in Sources */,
 				84F83DF72C10A4D80094346C /* Item.swift in Sources */,
 				84F83DF32C10A4D80094346C /* DeskNoteApp.swift in Sources */,
+				84F83E272C17104C0094346C /* ColorPalette.swift in Sources */,
 				84F83E212C15DE120094346C /* NoteUICallback.swift in Sources */,
 				84F83E0B2C12AA930094346C /* NoteWindowController.swift in Sources */,
 				84F83E232C15EA080094346C /* PaletteView.swift in Sources */,

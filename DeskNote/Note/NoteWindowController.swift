@@ -10,9 +10,11 @@ import SwiftUI
 
 class NoteWindowController: NSWindowController {
     
-    private static let WIDTH: Double = 280, HEIGHT: Double = 280
+    static let WIDTH: Double = 280, HEIGHT: Double = 280
     
-    convenience init() {
+    private var windowCloseCallback: ((_ controller: NoteWindowController) -> Void)? = nil
+    
+    convenience init(windowCloseCallback: @escaping (_ controller: NoteWindowController) -> Void) {
         let screenSize = NSScreen.main?.frame ?? NSRect(x: 0, y: 0, width: 800, height: 600)
         let window = NoteWindow(
             contentRect: NSRect(
@@ -52,6 +54,8 @@ class NoteWindowController: NSWindowController {
         ))
         let contentView = NSHostingView(rootView: noteView)
         window.contentView = contentView
+        
+        self.windowCloseCallback = windowCloseCallback
     }
     
     func show(at: CGPoint? = nil) {
@@ -73,6 +77,12 @@ class NoteWindowController: NSWindowController {
         }
         
         show(at: pendingAt)
+    }
+    
+    override func close() {
+        windowCloseCallback?(self)
+        windowCloseCallback = nil
+        super.close()
     }
     
 }

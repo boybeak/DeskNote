@@ -10,10 +10,37 @@ import SwiftUI
 
 class NoteViewModel: ObservableObject {
     
-    @Published var bgColor: Color = .clear
-    @Published var bgAlpha: Double = 1
+    @Published var bgColor: Color = ConfigView.bgPalette[0] {
+        didSet {
+            if (oldValue != bgColor) {
+                refreshBackgroundColor()
+            }
+        }
+    }
+    @Published var bgColorCompat: Color = ConfigView.bgPalette[0]
     
-    @Published var alphaUnactiveOnly: Bool = false
+    @Published var isGlobalAlphaEditing: Bool = false {
+        didSet {
+            if (oldValue != isGlobalAlphaEditing) {
+                refreshBackgroundColor()
+            }
+        }
+    }
+    @Published var globalAlpha: Double = 1 {
+        didSet {
+            if (oldValue != globalAlpha) {
+                refreshBackgroundColor()
+            }
+        }
+    }
+    
+    @Published var alphaUnactiveOnly: Bool = false {
+        didSet {
+            if (oldValue != alphaUnactiveOnly) {
+                refreshBackgroundColor()
+            }
+        }
+    }
     
     @Published var fontColor: Color = ConfigView.fontPalette[0]
     
@@ -45,7 +72,7 @@ class NoteViewModel: ObservableObject {
     
     @Published var isCursorHoveringInMainPanel: Bool = false {
         didSet {
-            if oldValue != isCursorHovering {
+            if oldValue != isCursorHoveringInMainPanel {
                 if isCursorHovering {
                     withAnimation {
                         iconColor = fontColor
@@ -55,10 +82,17 @@ class NoteViewModel: ObservableObject {
                         iconColor = iconHintColor
                     }
                 }
+                refreshBackgroundColor()
             }
         }
     }
-    @Published var isCursorHoveringInConfigPanel: Bool = false
+    @Published var isCursorHoveringInConfigPanel: Bool = false {
+        didSet {
+            if (oldValue != isCursorHoveringInConfigPanel) {
+                refreshBackgroundColor()
+            }
+        }
+    }
     
     @Published var isConfigPanelShowing = false
     
@@ -78,6 +112,7 @@ class NoteViewModel: ObservableObject {
                 if (isMouseIgnored) {
                     wakeProgress = 0
                 }
+                refreshBackgroundColor()
                 uiCallback?.actionOnMouseIgnore(ignore: isMouseIgnored)
             }
         }
@@ -88,29 +123,36 @@ class NoteViewModel: ObservableObject {
         iconColor = iconHintColor
         
         wakeupTimer.onUpdate = { [self] remaining in
-            wakeProgress = 1 - 0.25 * Double(remaining)
+            withAnimation {
+                wakeProgress = 1 - 0.25 * Double(remaining)
+            }
         }
         wakeupTimer.onFinish = {
             withAnimation {
+                self.wakeProgress = 1
                 self.isMouseIgnored = false
             }
         }
     }
     
-    func getBackgroundColor()-> Color {
+    private func refreshBackgroundColor() {
+        bgColorCompat = computeBackgroundColor()
+    }
+    
+    private func computeBackgroundColor()-> Color {
         return if alphaUnactiveOnly {
-            if isCursorHovering {
+            if isCursorHovering && !isGlobalAlphaEditing {
                 bgColor
             } else {
-                bgColor.opacity(bgAlpha)
+                bgColor.opacity(globalAlpha)
             }
         } else {
-            bgColor.opacity(bgAlpha)
+            bgColor.opacity(globalAlpha)
         }
     }
     
     func getFontColor()-> Color {
-        return fontColor.opacity(bgAlpha)
+        return fontColor.opacity(globalAlpha)
     }
     
 }

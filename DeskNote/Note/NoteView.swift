@@ -95,7 +95,7 @@ struct NoteView: View {
                                     noteVM: self.noteVM,
                                     bgColor: $noteVM.bgColor,
                                     fontColor: $noteVM.fontColor,
-                                    bgAlpha: $noteVM.bgAlpha,
+                                    bgAlpha: $noteVM.globalAlpha,
                                     alphaUnactiveOnly: $noteVM.alphaUnactiveOnly,
                                     fontSize: $noteVM.fontSize
                                 )
@@ -123,6 +123,7 @@ struct NoteView: View {
                                 noteVM.uiCallback?.actionOnPin(pin: noteVM.isPinned)
                             }
                             .scaleEffect(noteVM.isMouseIgnored ? 0.75 : 1.0)
+                            .rotationEffect(.degrees(noteVM.isPinned ? 45 : 0))
                     }
                     ZStack {
                         Image(systemName: noteVM.cursorIconName)
@@ -165,34 +166,32 @@ struct NoteView: View {
             }
             
         }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-            .background(noteVM.getBackgroundColor())
+            .background(noteVM.bgColorCompat)
             .cornerRadius(8)
             .onHover { hovering in
-                withAnimation {
-                    workItem?.cancel()
-                    workItem = nil
-                    if hovering {
+                workItem?.cancel()
+                workItem = nil
+                if hovering {
+                    withAnimation {
+                        noteVM.isCursorHoveringInMainPanel = hovering
+                    }
+                } else {
+                    workItem = DispatchWorkItem {
+                        workItem = nil
                         withAnimation {
                             noteVM.isCursorHoveringInMainPanel = hovering
-                        }
-                    } else {
-                        workItem = DispatchWorkItem {
-                            workItem = nil
-                            withAnimation {
-                                noteVM.isCursorHoveringInMainPanel = hovering
-                                if noteVM.isMouseIgnoredEnable {
-                                    noteVM.isMouseIgnored = !noteVM.isCursorHovering
-                                }
+                            if noteVM.isMouseIgnoredEnable {
+                                noteVM.isMouseIgnored = !noteVM.isCursorHovering
                             }
                         }
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25, execute: workItem!)
                     }
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.25, execute: workItem!)
                 }
                 if noteVM.isMouseIgnoredEnable {
                     if noteVM.isMouseIgnored {
                         if (hovering) {
-                            noteVM.wakeupTimer.start(totalTime: 4)
+                            noteVM.wakeupTimer.start(totalTime: 3)
                         } else {
                             noteVM.wakeupTimer.stop()
                             noteVM.wakeupTimer.reset()

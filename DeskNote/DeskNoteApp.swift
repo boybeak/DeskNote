@@ -60,10 +60,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @objc func onNewNoteAction() {
-        let noteWin = NoteWindowController()
+        let noteWin = NoteWindowController { controler in
+            self.windows.removeAll { $0 == controler }
+        }
         
         if windows.isEmpty {
-            noteWin.show()
+            if let button = self.tray.statusItem?.button {
+                if let window = button.window {
+                    let buttonFrame = button.convert(button.bounds, to: nil)
+                    let screenFrame = window.convertToScreen(buttonFrame)
+                    noteWin.show(at: CGPoint(x: screenFrame.origin.x - NoteWindowController.WIDTH / 2 + screenFrame.width / 2, y: screenFrame.origin.y - NoteWindowController.HEIGHT - 8))
+                }
+            }
         } else {
             noteWin.showAccordingTo(window: windows.last!.window!)
         }

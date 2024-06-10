@@ -9,8 +9,8 @@ import SwiftUI
 
 struct ConfigView: View {
     
-    static let bgPalette: [Color] = [.yellow, .red, .green, .blue, .orange, .mint, .cyan]
-    static let fontPalette: [Color] = [.black, .white, .gray]
+    static let bgPalette: [Color] = ColorPalette.allCases.map { $0.color }
+    static let fontPalette: [Color] = [.black, .white, Color(red: 0.32, green: 0.32, blue: 0.32)]
     
     @ObservedObject var noteVM: NoteViewModel
     
@@ -30,9 +30,18 @@ struct ConfigView: View {
                     bgColor = ConfigView.bgPalette[index]
                 }
             }
-            Slider(value: $bgAlpha, in: 0.2 ... 1)
-                .controlSize(.mini)
-                .frame(minWidth: 0, maxWidth: .infinity)
+            Slider(
+                value: $bgAlpha,
+                in: 0.2 ... 1,
+                onEditingChanged: { editing in
+                    withAnimation {
+                        noteVM.isGlobalAlphaEditing = editing
+                    }
+                }
+            )
+            .controlSize(.mini)
+            .frame(minWidth: 0, maxWidth: .infinity)
+//            ColorPicker("Custom:", selection: $bgColor)
             Toggle(isOn: $alphaUnactiveOnly) {
                 Text("Unactive only")
             }
@@ -54,11 +63,15 @@ struct ConfigView: View {
             workItem?.cancel()
             workItem = nil
             if hovering {
-                noteVM.isCursorHoveringInConfigPanel = hovering
+                withAnimation {
+                    noteVM.isCursorHoveringInConfigPanel = hovering
+                }
             } else {
                 workItem = DispatchWorkItem {
                     workItem = nil
-                    noteVM.isCursorHoveringInConfigPanel = hovering
+                    withAnimation {
+                        noteVM.isCursorHoveringInConfigPanel = hovering
+                    }
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.25, execute: workItem!)
             }

@@ -9,9 +9,9 @@ import SwiftUI
 
 struct CircularProgressView: View {
     var progress: Double
-    var lineWidth: CGFloat = 2
+    var lineWidth: CGFloat = 2.5
     var trackColor: Color = .clear
-    var progressColor: Color = .gray
+    var progressColor: Color = Color(red: 0.4, green: 0.4, blue: 0.4)
 
     var body: some View {
         ZStack {
