@@ -18,36 +18,9 @@ struct NoteView: View {
     
     @State private var text: String = "Hello, World"
     
-    @State private var configShowing = false
-    
     private let barColor = Color(red: 0.6, green: 0.6, blue: 0.6, opacity: 0.25)
     
-    private let iconHintColor = Color(red: 0.5, green: 0.5, blue: 0.5, opacity: 0.5)
-    @State private var iconColor: Color
-    
     private let draggerColor = Color(red: 1, green: 1, blue: 1, opacity: 0.4)
-    @State private var draggerEnable = false {
-        didSet {
-            if draggerEnable {
-                withAnimation {
-                    iconColor = fontColor
-                }
-            } else {
-                withAnimation {
-                    iconColor = iconHintColor
-                }
-            }
-        }
-    }
-    
-    @State private var bgColor: Color = ConfigView.bgPalette[0]
-    @State private var bgAlpha: Double = 1
-        
-    
-    @State private var fontColor: Color = ConfigView.fontPalette[0]
-    @State private var fontSize: Double = 16 // 初始值
-    
-    @State private var alphaUnactiveOnly: Bool = false
     
     @State private var isDragging = false {
         didSet {
@@ -70,10 +43,9 @@ struct NoteView: View {
             }
     }
     
-    @State private var isPinned = false
+    @State private var workItem: DispatchWorkItem? = nil
     
     init(callback: NoteUICallback? = nil) {
-        self.iconColor = self.iconHintColor
         self.uiCallback = callback
     }
     
@@ -81,15 +53,15 @@ struct NoteView: View {
     var body: some View {
         ZStack(alignment: .top) {
             TextEditor(text: $text)
-                .font(.system(size: fontSize))
-                .foregroundColor(fontColor.opacity(bgAlpha))
+                .font(.system(size: noteVM.fontSize))
+                .foregroundColor(noteVM.getFontColor())
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
                 .safeAreaPadding(EdgeInsets(top: 16, leading: 8, bottom: 8, trailing: 16))
                 .scrollContentBackground(.hidden)
                 .background(.clear)
                 .scrollDisabled(true)
             VStack {
-                if draggerEnable && !noteVM.isMouseIgnored {
+                if noteVM.isCursorHovering && !noteVM.isMouseIgnored {
                     RoundedRectangle(cornerSize: CGSize(width: 4, height: 4))
                         .fill(draggerColor)
                         .stroke(barColor, lineWidth: 1)
@@ -112,50 +84,53 @@ struct NoteView: View {
                         Image(systemName: "paintpalette")
                             .bold()
                             .frame(width: 24, height: 24)
-                            .foregroundColor(iconColor)
+                            .foregroundColor(noteVM.iconColor)
                             .overlay {
-                                if draggerEnable {
+                                if noteVM.isCursorHovering {
                                     Circle().fill(barColor)
                                 }
                             }
-                            .popover(isPresented: $configShowing) {
+                            .popover(isPresented: $noteVM.isConfigPanelShowing) {
                                 ConfigView(
-                                    bgColor: $bgColor,
-                                    fontColor: $fontColor,
-                                    bgAlpha: $bgAlpha, 
-                                    alphaUnactiveOnly: $alphaUnactiveOnly,
-                                    fontSize: $fontSize
+                                    noteVM: self.noteVM,
+                                    bgColor: $noteVM.bgColor,
+                                    fontColor: $noteVM.fontColor,
+                                    bgAlpha: $noteVM.bgAlpha,
+                                    alphaUnactiveOnly: $noteVM.alphaUnactiveOnly,
+                                    fontSize: $noteVM.fontSize
                                 )
                             }
                             .onTapGesture {
-                                configShowing.toggle()
+                                withAnimation {
+                                    noteVM.isConfigPanelShowing.toggle()
+                                }
                             }
                     }
-                    if !noteVM.isMouseIgnored || isPinned {
-                        Image(systemName: isPinned ? "pin.fill" : "pin.slash")
+                    if !noteVM.isMouseIgnored || noteVM.isPinned {
+                        Image(systemName: noteVM.pinIconName)
                             .bold()
                             .frame(width: 24, height: 24)
-                            .foregroundColor(noteVM.isMouseIgnored ? iconHintColor : iconColor)
+                            .foregroundColor(noteVM.pinIconColor)
                             .overlay {
-                                if draggerEnable && !noteVM.isMouseIgnored {
+                                if noteVM.isCursorHovering && !noteVM.isMouseIgnored {
                                     Circle().fill(barColor)
                                 }
                             }
                             .onTapGesture {
                                 withAnimation {
-                                    isPinned.toggle()
+                                    noteVM.isPinned.toggle()
                                 }
-                                noteVM.uiCallback?.actionOnPin(pin: isPinned)
+                                noteVM.uiCallback?.actionOnPin(pin: noteVM.isPinned)
                             }
                             .scaleEffect(noteVM.isMouseIgnored ? 0.75 : 1.0)
                     }
                     ZStack {
-                        Image(systemName: noteVM.isMouseIgnoredEnable ? "cursorarrow.slash" : "cursorarrow")
+                        Image(systemName: noteVM.cursorIconName)
                             .bold()
                             .frame(width: 24, height: 24)
-                            .foregroundColor(noteVM.isMouseIgnored ? iconHintColor : iconColor)
+                            .foregroundColor(noteVM.cursorIconColor)
                             .overlay {
-                                if draggerEnable && !noteVM.isMouseIgnored {
+                                if noteVM.isCursorHovering && !noteVM.isMouseIgnored {
                                     Circle().fill(barColor)
                                 }
                             }
@@ -164,7 +139,7 @@ struct NoteView: View {
                                     noteVM.isMouseIgnoredEnable.toggle()
                                 }
                             }
-                        if draggerEnable && noteVM.isMouseIgnored {
+                        if noteVM.isCursorHovering && noteVM.isMouseIgnored {
                             CircularProgressView(progress: noteVM.wakeProgress)
                                 .frame(width: 24, height: 24)
                         }
@@ -173,9 +148,9 @@ struct NoteView: View {
                         Image(systemName: "trash")
                             .bold()
                             .frame(width: 24, height: 24)
-                            .foregroundColor(iconColor)
+                            .foregroundColor(noteVM.iconColor)
                             .overlay {
-                                if draggerEnable {
+                                if noteVM.isCursorHovering {
                                     Circle().fill(barColor)
                                 }
                             }
@@ -190,11 +165,29 @@ struct NoteView: View {
             }
             
         }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-            .background(bgColor.opacity(bgAlpha))
+            .background(noteVM.getBackgroundColor())
             .cornerRadius(8)
             .onHover { hovering in
                 withAnimation {
-                    draggerEnable.toggle()
+                    workItem?.cancel()
+                    workItem = nil
+                    if hovering {
+                        withAnimation {
+                            noteVM.isCursorHoveringInMainPanel = hovering
+                        }
+                    } else {
+                        workItem = DispatchWorkItem {
+                            workItem = nil
+                            withAnimation {
+                                noteVM.isCursorHoveringInMainPanel = hovering
+                                if noteVM.isMouseIgnoredEnable {
+                                    noteVM.isMouseIgnored = !noteVM.isCursorHovering
+                                }
+                            }
+                        }
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25, execute: workItem!)
+                    }
                 }
                 if noteVM.isMouseIgnoredEnable {
                     if noteVM.isMouseIgnored {
@@ -204,11 +197,6 @@ struct NoteView: View {
                             noteVM.wakeupTimer.stop()
                             noteVM.wakeupTimer.reset()
                             noteVM.wakeProgress = 0
-                        }
-                    }
-                    if !hovering {
-                        withAnimation {
-                            noteVM.isMouseIgnored = true
                         }
                     }
                 }

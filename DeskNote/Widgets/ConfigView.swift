@@ -12,11 +12,15 @@ struct ConfigView: View {
     static let bgPalette: [Color] = [.yellow, .red, .green, .blue, .orange, .mint, .cyan]
     static let fontPalette: [Color] = [.black, .white, .gray]
     
+    @ObservedObject var noteVM: NoteViewModel
+    
     @Binding var bgColor: Color
     @Binding var fontColor: Color
     @Binding var bgAlpha: Double
     @Binding var alphaUnactiveOnly: Bool
     @Binding var fontSize: Double
+    
+    @State private var workItem: DispatchWorkItem? = nil
     
     var body: some View {
         VStack {
@@ -45,6 +49,20 @@ struct ConfigView: View {
                 .frame(minWidth: 0, maxWidth: .infinity)
         }
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-        .padding(.all, 8)
+        .padding(.all, 16)
+        .onHover { hovering in
+            workItem?.cancel()
+            workItem = nil
+            if hovering {
+                noteVM.isCursorHoveringInConfigPanel = hovering
+            } else {
+                workItem = DispatchWorkItem {
+                    workItem = nil
+                    noteVM.isCursorHoveringInConfigPanel = hovering
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.25, execute: workItem!)
+            }
+            
+        }
     }
 }
