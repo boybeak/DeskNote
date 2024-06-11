@@ -54,6 +54,8 @@ struct NoteView: View {
         ZStack(alignment: .top) {
             TextEditor(text: $text)
                 .font(.system(size: noteVM.fontSize))
+                .bold(noteVM.isBold)
+                .italic(noteVM.isItalic)
                 .foregroundColor(noteVM.getFontColor())
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
                 .safeAreaPadding(EdgeInsets(top: 16, leading: 8, bottom: 8, trailing: 16))
@@ -97,7 +99,9 @@ struct NoteView: View {
                                     fontColor: $noteVM.fontColor,
                                     bgAlpha: $noteVM.globalAlpha,
                                     alphaUnactiveOnly: $noteVM.alphaUnactiveOnly,
-                                    fontSize: $noteVM.fontSize
+                                    fontSize: $noteVM.fontSize, 
+                                    isBold: $noteVM.isBold, 
+                                    isItalic: $noteVM.isItalic
                                 )
                             }
                             .onTapGesture {

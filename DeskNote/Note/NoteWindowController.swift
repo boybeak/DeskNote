@@ -10,7 +10,7 @@ import SwiftUI
 
 class NoteWindowController: NSWindowController {
     
-    static let WIDTH: Double = 280, HEIGHT: Double = 280
+    static let WIDTH: Double = 256, HEIGHT: Double = 256
     
     private var windowCloseCallback: ((_ controller: NoteWindowController) -> Void)? = nil
     

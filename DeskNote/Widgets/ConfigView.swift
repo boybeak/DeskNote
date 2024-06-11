@@ -19,6 +19,8 @@ struct ConfigView: View {
     @Binding var bgAlpha: Double
     @Binding var alphaUnactiveOnly: Bool
     @Binding var fontSize: Double
+    @Binding var isBold: Bool
+    @Binding var isItalic: Bool
     
     @State private var workItem: DispatchWorkItem? = nil
     
@@ -41,7 +43,11 @@ struct ConfigView: View {
             )
             .controlSize(.mini)
             .frame(minWidth: 0, maxWidth: .infinity)
-//            ColorPicker("Custom:", selection: $bgColor)
+            ColorPicker("", selection: $bgColor)
+                .frame(width: 24, height: 24)
+                .overlay {
+                    Circle().fill(.clear)
+                }
             Toggle(isOn: $alphaUnactiveOnly) {
                 Text("Unactive only")
             }
@@ -56,6 +62,19 @@ struct ConfigView: View {
             Slider(value: $fontSize, in: 10 ... 36)
                 .controlSize(.mini)
                 .frame(minWidth: 0, maxWidth: .infinity)
+            HStack {
+                Toggle(isOn: $isBold) {
+                    Image(systemName: "bold")
+                }
+                .frame(width: 24, height: 24)
+                .toggleStyle(.button)
+                Toggle(isOn: $isItalic) {
+                    Image(systemName: "italic")
+                }
+                .frame(width: 24, height: 24)
+                .toggleStyle(.button)
+            }
+            
         }
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
         .padding(.all, 16)

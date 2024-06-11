@@ -30,8 +30,8 @@
             filePath = "DeskNote/Note/NoteViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
             landmarkName = "NoteViewModel"
             landmarkType = "3">
          </BreakpointContent>

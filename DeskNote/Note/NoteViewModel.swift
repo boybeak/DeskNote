@@ -46,6 +46,9 @@ class NoteViewModel: ObservableObject {
     
     @Published var fontSize: Double = 16
     
+    @Published var isBold: Bool = false
+    
+    @Published var isItalic: Bool = false
     
     private let iconHintColor = Color(red: 0.5, green: 0.5, blue: 0.5, opacity: 0.5)
     @Published var iconColor: Color
