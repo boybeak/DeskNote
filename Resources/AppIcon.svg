@@ -1,0 +1,24 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Define the clipping path with rounded corners -->
+  <defs>
+    <clipPath id="roundedCorners">
+      <rect x="32" y="32" width="448" height="448" rx="64" ry="64"/>
+    </clipPath>
+  </defs>
+  
+  <!-- Apply the clipping path to the entire SVG -->
+  <g clip-path="url(#roundedCorners)">
+    <!-- Left Top -->
+    <rect x="32" y="32" width="224" height="224" fill="#FFBA33"/>
+    <!-- Right Top -->
+    <rect x="256" y="32" width="224" height="224" fill="#33B5E5"/>
+    <!-- Left Bottom -->
+    <rect x="32" y="256" width="224" height="224" fill="#99CC00"/>
+    <!-- Right Bottom -->
+    <rect x="256" y="256" width="224" height="224" fill="#FF8080"/>
+  </g>
+  <text x="50%" y="50%" text-anchor="middle" alignment-baseline="central" 
+        font-size="180" font-weight="bold" fill="#525252" stroke="white" stroke-width="2">
+    Note
+  </text>
+</svg>

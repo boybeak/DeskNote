@@ -1,0 +1,14 @@
+<svg width="128" height="128" xmlns="http://www.w3.org/2000/svg">
+  <!-- 定义蒙版 -->
+  <mask id="circleMask">
+    <!-- 蒙版内容：白色的矩形表示完全显示，黑色的圆表示完全隐藏 -->
+    <rect x="0" y="0" width="128" height="128" rx="16" ry="16" fill="white" />
+    <text x="50%" y="55%" text-anchor="middle" dominant-baseline="middle" font-size="80" font-family="monospace"
+      font-weight="bold" fill="black">
+      N+
+    </text>
+  </mask>
+
+  <!-- 使用蒙版 -->
+  <rect x="0" y="0" width="128" height="128" rx="16" ry="16" fill="black" mask="url(#circleMask)" />
+</svg>
