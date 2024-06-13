@@ -18,7 +18,8 @@
     <rect x="256" y="256" width="224" height="224" fill="#FF8080"/>
   </g>
   <text x="50%" y="50%" text-anchor="middle" alignment-baseline="central" 
-        font-size="180" font-weight="bold" fill="#525252" stroke="white" stroke-width="2">
+        font-size="160" font-weight="bold" font-family="monospace"
+        fill="#525252" stroke="white" stroke-width="2">
     Note
   </text>
 </svg>
