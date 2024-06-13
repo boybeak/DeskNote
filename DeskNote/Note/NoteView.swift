@@ -10,13 +10,8 @@ import SwiftData
 
 struct NoteView: View {
     
-    @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
-    
-    @StateObject private var noteVM: NoteViewModel = NoteViewModel()
-    private var uiCallback: NoteUICallback?
-    
-    @State private var text: String = "Hello, World"
+    @StateObject var noteVM: NoteVM
+    var uiCallback: NoteUICallback
     
     private let barColor = Color(red: 0.6, green: 0.6, blue: 0.6, opacity: 0.25)
     
@@ -45,20 +40,22 @@ struct NoteView: View {
     
     @State private var workItem: DispatchWorkItem? = nil
     
+    /*
     init(callback: NoteUICallback? = nil) {
         self.uiCallback = callback
-    }
+    }*/
     
     // MARK: -Body
     var body: some View {
         ZStack(alignment: .top) {
-            TextEditor(text: $text)
+            TextEditor(text: $noteVM.text)
                 .font(.system(size: noteVM.fontSize))
                 .bold(noteVM.isBold)
                 .italic(noteVM.isItalic)
                 .foregroundColor(noteVM.getFontColor())
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-                .safeAreaPadding(EdgeInsets(top: 16, leading: 8, bottom: 8, trailing: 16))
+                .safeAreaPadding(.vertical, 16)
+                .safeAreaPadding(.horizontal, 8)
                 .scrollContentBackground(.hidden)
                 .background(.clear)
                 .scrollDisabled(true)
@@ -98,7 +95,7 @@ struct NoteView: View {
                                     bgColor: $noteVM.bgColor,
                                     fontColor: $noteVM.fontColor,
                                     bgAlpha: $noteVM.globalAlpha,
-                                    alphaUnactiveOnly: $noteVM.alphaUnactiveOnly,
+                                    alphaUnactiveOnly: $noteVM.alphaUnhoverOnly,
                                     fontSize: $noteVM.fontSize, 
                                     isBold: $noteVM.isBold, 
                                     isItalic: $noteVM.isItalic
@@ -170,7 +167,7 @@ struct NoteView: View {
             }
             
         }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-            .background(noteVM.bgColorCompat)
+            .background(noteVM.bgColorSmart)
             .cornerRadius(8)
             .onHover { hovering in
                 workItem?.cancel()
@@ -209,9 +206,4 @@ struct NoteView: View {
                 self.noteVM.uiCallback = self.uiCallback
             }
     }
-}
-
-#Preview {
-    NoteView()
-        .modelContainer(for: Item.self, inMemory: true)
 }

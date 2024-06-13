@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		84F83DF32C10A4D80094346C /* DeskNoteApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F83DF22C10A4D80094346C /* DeskNoteApp.swift */; };
 		84F83DF52C10A4D80094346C /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F83DF42C10A4D80094346C /* NoteView.swift */; };
-		84F83DF72C10A4D80094346C /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F83DF62C10A4D80094346C /* Item.swift */; };
 		84F83DF92C10A4DA0094346C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84F83DF82C10A4DA0094346C /* Assets.xcassets */; };
 		84F83DFC2C10A4DA0094346C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84F83DFB2C10A4DA0094346C /* Preview Assets.xcassets */; };
 		84F83E052C10B22F0094346C /* Tray in Frameworks */ = {isa = PBXBuildFile; productRef = 84F83E042C10B22F0094346C /* Tray */; };
@@ -17,18 +16,21 @@
 		84F83E112C12FB0C0094346C /* NoteWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F83E102C12FB0C0094346C /* NoteWindow.swift */; };
 		84F83E1A2C159DDE0094346C /* CountdownTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F83E192C159DDE0094346C /* CountdownTimer.swift */; };
 		84F83E1C2C15B47B0094346C /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F83E1B2C15B47B0094346C /* CircularProgressView.swift */; };
-		84F83E1F2C15C3840094346C /* NoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F83E1E2C15C3840094346C /* NoteViewModel.swift */; };
+		84F83E1F2C15C3840094346C /* NoteVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F83E1E2C15C3840094346C /* NoteVM.swift */; };
 		84F83E212C15DE120094346C /* NoteUICallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F83E202C15DE120094346C /* NoteUICallback.swift */; };
 		84F83E232C15EA080094346C /* PaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F83E222C15EA080094346C /* PaletteView.swift */; };
 		84F83E252C15EA310094346C /* ConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F83E242C15EA310094346C /* ConfigView.swift */; };
 		84F83E272C17104C0094346C /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F83E262C17104C0094346C /* ColorPalette.swift */; };
+		84F83E2A2C1887930094346C /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F83E292C1887930094346C /* Note.swift */; };
+		84F83E2C2C18987C0094346C /* ColorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F83E2B2C18987C0094346C /* ColorUtils.swift */; };
+		84F83E302C1986120094346C /* NoteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F83E2F2C1986120094346C /* NoteManager.swift */; };
+		84F83E352C199CE70094346C /* DeskNote.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84F83E332C199CE70094346C /* DeskNote.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		84F83DEF2C10A4D80094346C /* DeskNote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeskNote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84F83DF22C10A4D80094346C /* DeskNoteApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeskNoteApp.swift; sourceTree = "<group>"; };
 		84F83DF42C10A4D80094346C /* NoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
-		84F83DF62C10A4D80094346C /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		84F83DF82C10A4DA0094346C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84F83DFB2C10A4DA0094346C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		84F83DFD2C10A4DA0094346C /* DeskNote.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DeskNote.entitlements; sourceTree = "<group>"; };
@@ -36,11 +38,15 @@
 		84F83E102C12FB0C0094346C /* NoteWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteWindow.swift; sourceTree = "<group>"; };
 		84F83E192C159DDE0094346C /* CountdownTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownTimer.swift; sourceTree = "<group>"; };
 		84F83E1B2C15B47B0094346C /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
-		84F83E1E2C15C3840094346C /* NoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewModel.swift; sourceTree = "<group>"; };
+		84F83E1E2C15C3840094346C /* NoteVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteVM.swift; sourceTree = "<group>"; };
 		84F83E202C15DE120094346C /* NoteUICallback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteUICallback.swift; sourceTree = "<group>"; };
 		84F83E222C15EA080094346C /* PaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteView.swift; sourceTree = "<group>"; };
 		84F83E242C15EA310094346C /* ConfigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigView.swift; sourceTree = "<group>"; };
 		84F83E262C17104C0094346C /* ColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
+		84F83E292C1887930094346C /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		84F83E2B2C18987C0094346C /* ColorUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorUtils.swift; sourceTree = "<group>"; };
+		84F83E2F2C1986120094346C /* NoteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteManager.swift; sourceTree = "<group>"; };
+		84F83E342C199CE70094346C /* DeskNote.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DeskNote.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,10 +84,10 @@
 				84F83E182C159DCD0094346C /* Utils */,
 				84F83E122C149EE10094346C /* Note */,
 				84F83DF22C10A4D80094346C /* DeskNoteApp.swift */,
-				84F83DF62C10A4D80094346C /* Item.swift */,
 				84F83DF82C10A4DA0094346C /* Assets.xcassets */,
 				84F83DFD2C10A4DA0094346C /* DeskNote.entitlements */,
 				84F83DFA2C10A4DA0094346C /* Preview Content */,
+				84F83E332C199CE70094346C /* DeskNote.xcdatamodeld */,
 			);
 			path = DeskNote;
 			sourceTree = "<group>";
@@ -97,11 +103,13 @@
 		84F83E122C149EE10094346C /* Note */ = {
 			isa = PBXGroup;
 			children = (
+				84F83E292C1887930094346C /* Note.swift */,
 				84F83E0A2C12AA930094346C /* NoteWindowController.swift */,
 				84F83E102C12FB0C0094346C /* NoteWindow.swift */,
 				84F83DF42C10A4D80094346C /* NoteView.swift */,
-				84F83E1E2C15C3840094346C /* NoteViewModel.swift */,
+				84F83E1E2C15C3840094346C /* NoteVM.swift */,
 				84F83E202C15DE120094346C /* NoteUICallback.swift */,
+				84F83E2F2C1986120094346C /* NoteManager.swift */,
 			);
 			path = Note;
 			sourceTree = "<group>";
@@ -111,6 +119,7 @@
 			children = (
 				84F83E192C159DDE0094346C /* CountdownTimer.swift */,
 				84F83E262C17104C0094346C /* ColorPalette.swift */,
+				84F83E2B2C18987C0094346C /* ColorUtils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -201,13 +210,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84F83E1F2C15C3840094346C /* NoteViewModel.swift in Sources */,
+				84F83E302C1986120094346C /* NoteManager.swift in Sources */,
+				84F83E1F2C15C3840094346C /* NoteVM.swift in Sources */,
+				84F83E2C2C18987C0094346C /* ColorUtils.swift in Sources */,
 				84F83E112C12FB0C0094346C /* NoteWindow.swift in Sources */,
 				84F83E1A2C159DDE0094346C /* CountdownTimer.swift in Sources */,
 				84F83DF52C10A4D80094346C /* NoteView.swift in Sources */,
 				84F83E252C15EA310094346C /* ConfigView.swift in Sources */,
-				84F83DF72C10A4D80094346C /* Item.swift in Sources */,
+				84F83E2A2C1887930094346C /* Note.swift in Sources */,
 				84F83DF32C10A4D80094346C /* DeskNoteApp.swift in Sources */,
+				84F83E352C199CE70094346C /* DeskNote.xcdatamodeld in Sources */,
 				84F83E272C17104C0094346C /* ColorPalette.swift in Sources */,
 				84F83E212C15DE120094346C /* NoteUICallback.swift in Sources */,
 				84F83E0B2C12AA930094346C /* NoteWindowController.swift in Sources */,
@@ -427,6 +439,20 @@
 			productName = Tray;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		84F83E332C199CE70094346C /* DeskNote.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				84F83E342C199CE70094346C /* DeskNote.xcdatamodel */,
+			);
+			currentVersion = 84F83E342C199CE70094346C /* DeskNote.xcdatamodel */;
+			name = DeskNote.xcdatamodeld;
+			path = /Users/beak/Github/DeskNote/DeskNote/DeskNote.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 84F83DE72C10A4D80094346C /* Project object */;
 }

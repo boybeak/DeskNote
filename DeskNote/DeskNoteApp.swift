@@ -11,23 +11,10 @@ import Tray
 
 @main
 struct DeskNoteApp: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Item.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
-    
     @NSApplicationDelegateAdaptor(AppDelegate.self) var app: AppDelegate
 
     var body: some Scene {
-        Settings {}.modelContainer(sharedModelContainer)
+        Settings {}
     }
 }
 
@@ -40,7 +27,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
         
         tray = Tray.install(systemSymbolName: "newspaper.fill") { tray in
-//            tray.setView(content: NoteView())
+            //            tray.setView(content: NoteView())
             tray.setOnLeftClick(onClick: {
                 self.onNewNoteAction()
                 return true
@@ -57,6 +44,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         menu.addItem(testMenuItem)
         menu.addItem(quitMenuItem)
         tray.setMenu(menu: menu)
+        
+        showHistoryNotes(notes: NoteManager.shared.fetchAllNotes())
     }
     
     @objc func onNewNoteAction() {
@@ -69,13 +58,33 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 if let window = button.window {
                     let buttonFrame = button.convert(button.bounds, to: nil)
                     let screenFrame = window.convertToScreen(buttonFrame)
-                    noteWin.show(at: CGPoint(x: screenFrame.origin.x - NoteWindowController.WIDTH / 2 + screenFrame.width / 2, y: screenFrame.origin.y - NoteWindowController.HEIGHT - 8))
+                    let position = CGPoint(x: screenFrame.origin.x - NoteWindowController.WIDTH / 2 + screenFrame.width / 2, y: screenFrame.origin.y - NoteWindowController.HEIGHT - 8)
+                    noteWin.show(at: position) { point in
+                        newNote(position: point)
+                    }
                 }
             }
         } else {
-            noteWin.showAccordingTo(window: windows.last!.window!)
+            _ = noteWin.showAccordingTo(window: windows.last!.window!) { point in
+                newNote(position: point)
+            }
         }
         windows.append(noteWin)
+    }
+    
+    private func newNote(position: CGPoint) -> Note {
+        return NoteManager.shared.addNote(position: position)
+    }
+    
+    private func showHistoryNotes(notes: [Note]) {
+        notes.forEach { note in
+            let win = NoteWindowController { controller in
+                NoteManager.shared.deleteNote(note: note)
+            }
+            win.show(at: note.position?.toPoint()) { point in
+                return note
+            }
+        }
     }
     
     @objc func onTestAction() {
