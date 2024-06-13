@@ -12,7 +12,7 @@ struct ConfigView: View {
     static let bgPalette: [Color] = ColorPalette.allCases.map { $0.color }
     static let fontPalette: [Color] = [.black, .white, Color(red: 0.32, green: 0.32, blue: 0.32)]
     
-    @ObservedObject var noteVM: NoteViewModel
+    @ObservedObject var noteVM: NoteVM
     
     @Binding var bgColor: Color
     @Binding var fontColor: Color

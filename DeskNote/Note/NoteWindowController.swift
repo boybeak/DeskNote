@@ -34,7 +34,11 @@ class NoteWindowController: NSWindowController {
         
         self.init(window: window)
         
-        let noteView = NoteView(callback: NoteUICallback(
+        self.windowCloseCallback = windowCloseCallback
+    }
+    
+    private func bindNoteView(note: Note) {
+        let noteView = NoteView(noteVM: NoteVM(note: note), uiCallback: NoteUICallback(
             onMouseIgnore: { ignored in
                 self.window?.ignoresMouseEvents = ignored
             },
@@ -49,23 +53,30 @@ class NoteWindowController: NSWindowController {
                 self.window?.setFrameOrigin(NSPoint(x: origin!.x + move.width, y: origin!.y - move.height))
             },
             onDragEnd: {
-                
+                note.position = (self.window?.frame.origin ?? CGPoint()).toData()
+                NoteManager.shared.updateNote()
             }
         ))
+
         let contentView = NSHostingView(rootView: noteView)
-        window.contentView = contentView
-        
-        self.windowCloseCallback = windowCloseCallback
+        window?.contentView = contentView
     }
     
-    func show(at: CGPoint? = nil) {
+    func show(at: CGPoint? = nil, noteCreator: (_ point: CGPoint) -> Note) {
         if at != nil {
             window?.setFrame(CGRect(x: at!.x, y: at!.y, width: NoteWindowController.WIDTH, height: NoteWindowController.HEIGHT), display: false)
+        } else {
+            window?.center()
         }
+        
+        let note = noteCreator(window?.frame.origin ?? CGPoint(x: 0, y: 0))
+        
+        bindNoteView(note: note)
+        
         showWindow(nil)
     }
     
-    func showAccordingTo(window: NSWindow) {
+    func showAccordingTo(window: NSWindow, noteCreator: (_ point: CGPoint) -> Note)-> CGPoint {
         let frame = window.frame
         
         var pendingAt = CGPoint(x: frame.origin.x, y: frame.origin.y - NoteWindowController.HEIGHT)
@@ -76,7 +87,9 @@ class NoteWindowController: NSWindowController {
             pendingAt.x = frame.origin.x - NoteWindowController.WIDTH
         }
         
-        show(at: pendingAt)
+        show(at: pendingAt, noteCreator: noteCreator)
+        
+        return pendingAt
     }
     
     override func close() {

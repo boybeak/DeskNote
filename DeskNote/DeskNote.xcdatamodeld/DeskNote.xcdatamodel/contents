@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22758" systemVersion="23F79" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="Note" representedClassName="Note" syncable="YES" codeGenerationType="class">
+        <attribute name="alpha" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="alphaOnlyUnhover" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="bgColor" optional="YES" attributeType="Binary"/>
+        <attribute name="fontColor" optional="YES" attributeType="Binary"/>
+        <attribute name="fontSize" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="isBold" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isItalic" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isMouseIgnoreEnabled" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isPinned" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="position" optional="YES" attributeType="Binary"/>
+        <attribute name="text" optional="YES" attributeType="String"/>
+    </entity>
+</model>
