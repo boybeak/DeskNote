@@ -13,6 +13,7 @@ struct NoteView: View {
     @StateObject var noteVM: NoteVM
     var uiCallback: NoteUICallback
     
+    private let borderColor = Color(red: 0.6, green: 0.6, blue: 0.6, opacity: 0.6)
     private let barColor = Color(red: 0.6, green: 0.6, blue: 0.6, opacity: 0.25)
     
     private let draggerColor = Color(red: 1, green: 1, blue: 1, opacity: 0.4)
@@ -40,10 +41,7 @@ struct NoteView: View {
     
     @State private var workItem: DispatchWorkItem? = nil
     
-    /*
-    init(callback: NoteUICallback? = nil) {
-        self.uiCallback = callback
-    }*/
+    @State private var showDeleteTip: Bool = false
     
     // MARK: -Body
     var body: some View {
@@ -157,7 +155,19 @@ struct NoteView: View {
                                 }
                             }
                             .onTapGesture {
-                                noteVM.uiCallback?.actionOnClose()
+                                showDeleteTip.toggle()
+                            }
+                            .popover(isPresented: $showDeleteTip) {
+                                VStack {
+                                    Text("Tip_delete_note").font(.callout)
+                                    Spacer()
+                                    Button(action: {
+                                        showDeleteTip.toggle()
+                                        noteVM.uiCallback?.actionOnClose()
+                                    }, label: {
+                                        Text("Button_yes")
+                                    })
+                                }.padding()
                             }
                     }
                 }
@@ -169,6 +179,11 @@ struct NoteView: View {
         }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
             .background(noteVM.bgColorSmart)
             .cornerRadius(8)
+            .overlay {
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(borderColor, lineWidth: 1)
+                    .background(.clear)
+            }
             .onHover { hovering in
                 workItem?.cancel()
                 workItem = nil

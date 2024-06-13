@@ -20,8 +20,6 @@ struct DeskNoteApp: App {
 
 class AppDelegate: NSObject, NSApplicationDelegate {
     
-    private var windows = [NoteWindowController]()
-    
     private var tray: Tray!
     
     func applicationDidFinishLaunching(_ notification: Notification) {
@@ -35,13 +33,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         
         let menu = NSMenu()
-        let newNoteMenuItem = NSMenuItem(title: "New Note", action: #selector(onNewNoteAction), keyEquivalent: "")
         
-        let testMenuItem = NSMenuItem(title: "Test", action: #selector(onTestAction), keyEquivalent: "")
+        let newNoteMenuItem = NSMenuItem(title: NSLocalizedString("Menu_item_new_note", comment: ""), action: #selector(onNewNoteAction), keyEquivalent: "")
+        let quitMenuItem = NSMenuItem(title: NSLocalizedString("Menu_item_quit", comment: ""), action: #selector(onQuitAction), keyEquivalent: "")
         
-        let quitMenuItem = NSMenuItem(title: "Quit", action: #selector(onQuitAction), keyEquivalent: "")
         menu.addItem(newNoteMenuItem)
-        menu.addItem(testMenuItem)
         menu.addItem(quitMenuItem)
         tray.setMenu(menu: menu)
         
@@ -50,26 +46,25 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @objc func onNewNoteAction() {
         let noteWin = NoteWindowController { controler in
-            self.windows.removeAll { $0 == controler }
         }
         
-        if windows.isEmpty {
-            if let button = self.tray.statusItem?.button {
-                if let window = button.window {
-                    let buttonFrame = button.convert(button.bounds, to: nil)
-                    let screenFrame = window.convertToScreen(buttonFrame)
-                    let position = CGPoint(x: screenFrame.origin.x - NoteWindowController.WIDTH / 2 + screenFrame.width / 2, y: screenFrame.origin.y - NoteWindowController.HEIGHT - 8)
-                    noteWin.show(at: position) { point in
-                        newNote(position: point)
-                    }
+        if let button = self.tray.statusItem?.button {
+            if let window = button.window {
+                let buttonFrame = button.convert(button.bounds, to: nil)
+                let screenFrame = window.convertToScreen(buttonFrame)
+                var position = CGPoint(x: screenFrame.origin.x - NoteWindowController.WIDTH / 2 + screenFrame.width / 2, y: screenFrame.origin.y - NoteWindowController.HEIGHT - 8)
+                
+                let offsetX = Double.random(in: -50...50)
+                let offsetY = Double.random(in: -50...0)
+                
+                position.x += offsetX
+                position.y += offsetY
+                
+                noteWin.show(at: position) { point in
+                    newNote(position: point)
                 }
             }
-        } else {
-            _ = noteWin.showAccordingTo(window: windows.last!.window!) { point in
-                newNote(position: point)
-            }
         }
-        windows.append(noteWin)
     }
     
     private func newNote(position: CGPoint) -> Note {
@@ -79,7 +74,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private func showHistoryNotes(notes: [Note]) {
         notes.forEach { note in
             let win = NoteWindowController { controller in
-                NoteManager.shared.deleteNote(note: note)
+                
             }
             win.show(at: note.position?.toPoint()) { point in
                 return note
@@ -87,11 +82,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
     
-    @objc func onTestAction() {
-    }
-    
     @objc func onQuitAction() {
-        
+        NSApplication.shared.terminate(nil)
     }
     
 }

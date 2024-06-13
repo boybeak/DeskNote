@@ -47,19 +47,24 @@ class NoteWindowController: NSWindowController {
             },
             onClose: {
                 self.close()
+                NoteManager.shared.deleteNote(note: note)
             },
             onDragMove: { move in
                 let origin = self.window?.frame.origin
                 self.window?.setFrameOrigin(NSPoint(x: origin!.x + move.width, y: origin!.y - move.height))
+                self.window?.hasShadow = true
             },
             onDragEnd: {
+                self.window?.hasShadow = false
                 note.position = (self.window?.frame.origin ?? CGPoint()).toData()
                 NoteManager.shared.updateNote()
             }
         ))
 
         let contentView = NSHostingView(rootView: noteView)
+
         window?.contentView = contentView
+
     }
     
     func show(at: CGPoint? = nil, noteCreator: (_ point: CGPoint) -> Note) {
@@ -68,11 +73,8 @@ class NoteWindowController: NSWindowController {
         } else {
             window?.center()
         }
-        
         let note = noteCreator(window?.frame.origin ?? CGPoint(x: 0, y: 0))
-        
         bindNoteView(note: note)
-        
         showWindow(nil)
     }
     

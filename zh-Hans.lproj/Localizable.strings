@@ -1,0 +1,8 @@
+"Config_title_background" = "背景色";
+"Config_title_font" = "字体";
+"Config_alpha_unhover_only" = "非悬停生效";
+"Tip_delete_note" = "确认要删除吗?";
+"Button_yes" = "是的";
+
+"Menu_item_new_note" = "新建笔记";
+"Menu_item_quit" = "退出";

@@ -26,7 +26,7 @@ struct ConfigView: View {
     
     var body: some View {
         VStack {
-            Text("Background")
+            Text("Config_title_background").font(.title3)
             PaletteView(palette: ConfigView.bgPalette) { index in
                 withAnimation {
                     bgColor = ConfigView.bgPalette[index]
@@ -49,11 +49,11 @@ struct ConfigView: View {
                     Circle().fill(.clear)
                 }
             Toggle(isOn: $alphaUnactiveOnly) {
-                Text("Unactive only")
+                Text("Config_alpha_unhover_only")
             }
             .toggleStyle(.checkbox)
             Divider()
-            Text("Font")
+            Text("Config_title_font").font(.title3)
             PaletteView(palette: ConfigView.fontPalette) { index in
                 withAnimation {
                     fontColor = ConfigView.fontPalette[index]
