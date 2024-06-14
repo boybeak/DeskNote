@@ -39,7 +39,8 @@ struct NoteView: View {
             }
     }
     
-    @State private var workItem: DispatchWorkItem? = nil
+    @State private var mainWorkItem: DispatchWorkItem? = nil
+    @State private var deleteWorkItem: DispatchWorkItem? = nil
     
     @State private var showDeleteTip: Bool = false
     
@@ -167,7 +168,29 @@ struct NoteView: View {
                                     }, label: {
                                         Text("Button_yes")
                                     })
-                                }.padding()
+                                }
+                                .padding(.all, 8)
+                                .onHover { hovering in
+                                    deleteWorkItem?.cancel()
+                                    deleteWorkItem = nil
+                                    if hovering {
+                                        withAnimation {
+                                            noteVM.isHoveringInDeletePanel = hovering
+                                        }
+                                    } else {
+                                        deleteWorkItem = DispatchWorkItem {
+                                            deleteWorkItem = nil
+                                            withAnimation {
+                                                noteVM.isHoveringInDeletePanel = hovering
+                                                if noteVM.isMouseIgnoredEnable {
+                                                    noteVM.isMouseIgnored = !noteVM.isCursorHovering
+                                                }
+                                            }
+                                        }
+                                        
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25, execute: deleteWorkItem!)
+                                    }
+                                }
                             }
                     }
                 }
@@ -185,24 +208,24 @@ struct NoteView: View {
                     .background(.clear)
             }
             .onHover { hovering in
-                workItem?.cancel()
-                workItem = nil
+                mainWorkItem?.cancel()
+                mainWorkItem = nil
                 if hovering {
                     withAnimation {
-                        noteVM.isCursorHoveringInMainPanel = hovering
+                        noteVM.isHoveringInMainPanel = hovering
                     }
                 } else {
-                    workItem = DispatchWorkItem {
-                        workItem = nil
+                    mainWorkItem = DispatchWorkItem {
+                        mainWorkItem = nil
                         withAnimation {
-                            noteVM.isCursorHoveringInMainPanel = hovering
+                            noteVM.isHoveringInMainPanel = hovering
                             if noteVM.isMouseIgnoredEnable {
                                 noteVM.isMouseIgnored = !noteVM.isCursorHovering
                             }
                         }
                     }
                     
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.25, execute: workItem!)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.25, execute: mainWorkItem!)
                 }
                 if noteVM.isMouseIgnoredEnable {
                     if noteVM.isMouseIgnored {

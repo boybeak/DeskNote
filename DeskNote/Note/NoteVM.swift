@@ -128,12 +128,12 @@ class NoteVM: ObservableObject {
     }
     
     var isCursorHovering: Bool {
-        return isCursorHoveringInMainPanel || isCursorHoveringInConfigPanel
+        return isHoveringInMainPanel || isHoveringInConfigPanel || isHoveringInDeletePanel
     }
     
-    @Published var isCursorHoveringInMainPanel: Bool = false {
+    @Published var isHoveringInMainPanel: Bool = false {
         didSet {
-            if oldValue != isCursorHoveringInMainPanel {
+            if oldValue != isHoveringInMainPanel {
                 if isCursorHovering {
                     withAnimation {
                         iconColor = fontColor
@@ -147,9 +147,17 @@ class NoteVM: ObservableObject {
             }
         }
     }
-    @Published var isCursorHoveringInConfigPanel: Bool = false {
+    @Published var isHoveringInConfigPanel: Bool = false {
         didSet {
-            if (oldValue != isCursorHoveringInConfigPanel) {
+            if (oldValue != isHoveringInConfigPanel) {
+                refreshBackgroundColor()
+            }
+        }
+    }
+    
+    @Published var isHoveringInDeletePanel: Bool = false {
+        didSet {
+            if (oldValue != isHoveringInDeletePanel) {
                 refreshBackgroundColor()
             }
         }

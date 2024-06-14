@@ -83,13 +83,13 @@ struct ConfigView: View {
             workItem = nil
             if hovering {
                 withAnimation {
-                    noteVM.isCursorHoveringInConfigPanel = hovering
+                    noteVM.isHoveringInConfigPanel = hovering
                 }
             } else {
                 workItem = DispatchWorkItem {
                     workItem = nil
                     withAnimation {
-                        noteVM.isCursorHoveringInConfigPanel = hovering
+                        noteVM.isHoveringInConfigPanel = hovering
                     }
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.25, execute: workItem!)
