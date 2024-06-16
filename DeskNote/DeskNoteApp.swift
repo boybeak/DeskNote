@@ -60,15 +60,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 position.x += offsetX
                 position.y += offsetY
                 
-                noteWin.show(at: position) { point in
-                    newNote(position: point)
+                noteWin.show(at: position) { window in
+                    newNote(window: window)
                 }
             }
         }
     }
     
-    private func newNote(position: CGPoint) -> Note {
-        return NoteManager.shared.addNote(position: position)
+    private func newNote(window: NSWindow) -> Note {
+        return NoteManager.shared.addNote(window: window)
     }
     
     private func showHistoryNotes(notes: [Note]) {

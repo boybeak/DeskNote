@@ -6,6 +6,7 @@
 //
 
 import CoreData
+import AppKit
 
 class NoteManager {
     
@@ -24,9 +25,9 @@ class NoteManager {
     private init() {}
     
     // Create
-    func addNote(position: CGPoint)-> Note {
+    func addNote(window: NSWindow)-> Note {
         let context = persistentContainer.viewContext
-        let note = Note(context: context, position: position)
+        let note = Note(context: context, position: window.frame.origin, screen: window.screen)
         
         context.insert(note)
         saveContext()

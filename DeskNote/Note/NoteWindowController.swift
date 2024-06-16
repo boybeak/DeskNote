@@ -57,6 +57,7 @@ class NoteWindowController: NSWindowController {
             onDragEnd: {
                 self.window?.hasShadow = false
                 note.position = (self.window?.frame.origin ?? CGPoint()).toData()
+                note.screenName = self.window?.screen?.localizedName
                 NoteManager.shared.updateNote()
             }
         ))
@@ -67,18 +68,30 @@ class NoteWindowController: NSWindowController {
 
     }
     
-    func show(at: CGPoint? = nil, noteCreator: (_ point: CGPoint) -> Note) {
+    func show(at: CGPoint? = nil, screenName: String? = nil, noteCreator: (_ window: NSWindow) -> Note) {
         if at != nil {
-            window?.setFrame(CGRect(x: at!.x, y: at!.y, width: NoteWindowController.WIDTH, height: NoteWindowController.HEIGHT), display: false)
+            let screenFrame = NSScreen.screens.first { screen in
+                return screen.localizedName == screenName
+            }?.frame
+            let x = (screenFrame?.minX ?? 0) + at!.x
+            let y = (screenFrame?.minY ?? 0) + at!.y
+            let frame = CGRect(x: x, y: y, width: NoteWindowController.WIDTH, height: NoteWindowController.HEIGHT)
+            window?.setFrame(frame, display: false)
         } else {
-            window?.center()
+            let screenFrame = NSScreen.screens.first { screen in
+                return screen.localizedName == screenName
+            }?.frame
+            let x = min((screenFrame?.midX ?? 0) - NoteWindowController.WIDTH / 2, 0)
+            let y = min((screenFrame?.midY ?? 0) - NoteWindowController.HEIGHT / 2, 0)
+            let frame = CGRect(x: x, y: y, width: NoteWindowController.WIDTH, height: NoteWindowController.HEIGHT)
+            window?.setFrame(frame, display: false)
         }
-        let note = noteCreator(window?.frame.origin ?? CGPoint(x: 0, y: 0))
+        let note = noteCreator(window!)
         bindNoteView(note: note)
         showWindow(nil)
     }
     
-    func showAccordingTo(window: NSWindow, noteCreator: (_ point: CGPoint) -> Note)-> CGPoint {
+    func showAccordingTo(window: NSWindow, noteCreator: (_ window: NSWindow) -> Note)-> CGPoint {
         let frame = window.frame
         
         var pendingAt = CGPoint(x: frame.origin.x, y: frame.origin.y - NoteWindowController.HEIGHT)

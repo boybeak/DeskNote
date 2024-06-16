@@ -11,6 +11,7 @@
         <attribute name="isMouseIgnoreEnabled" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="isPinned" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="position" optional="YES" attributeType="Binary"/>
+        <attribute name="screenName" optional="YES" attributeType="String"/>
         <attribute name="text" optional="YES" attributeType="String"/>
     </entity>
 </model>

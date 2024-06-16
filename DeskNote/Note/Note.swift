@@ -54,13 +54,22 @@ class Note: NSManagedObject {
 }*/
 
 extension Note {
-    convenience init(context: NSManagedObjectContext, position: CGPoint) {
+    convenience init(context: NSManagedObjectContext, position: CGPoint, screen: NSScreen? = nil) {
         self.init(context: context)
         self.position = position.toData()
         self.bgColor = ConfigView.bgPalette[0].toData()
         self.fontColor = ConfigView.fontPalette[0].toData()
         self.alpha = 1
         self.fontSize = 16
+        if (screen != nil) {
+            self.screenName = screen!.localizedName
+        } else {
+            if NSScreen.screens.isEmpty {
+                self.screenName = nil
+            } else {
+                self.screenName = NSScreen.screens[0].localizedName
+            }
+        }
     }
 }
 
