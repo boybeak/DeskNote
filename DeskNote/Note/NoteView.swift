@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import WinDragger
 
 struct NoteView: View {
     
@@ -26,17 +27,6 @@ struct NoteView: View {
                 NSCursor.openHand.set()
             }
         }
-    }
-    private var drag: some Gesture {
-        DragGesture()
-            .onChanged { ev in
-                self.isDragging = true
-                noteVM.uiCallback?.actionOnDragMove(move: ev.translation)
-            }
-            .onEnded { ev in
-                self.isDragging = false
-                noteVM.uiCallback?.actionOnDragEnd()
-            }
     }
     
     @State private var mainWorkItem: DispatchWorkItem? = nil
@@ -60,9 +50,22 @@ struct NoteView: View {
                 .scrollDisabled(true)
             VStack {
                 if noteVM.isCursorHovering && !noteVM.isMouseIgnored {
-                    RoundedRectangle(cornerSize: CGSize(width: 4, height: 4))
-                        .fill(draggerColor)
-                        .stroke(barColor, lineWidth: 1)
+                    WinDraggerView()
+                        .onDragStart {
+                            self.isDragging = true
+                            noteVM.uiCallback?.actionOnDragStart()
+                            NSCursor.closedHand.set()
+                        }
+                        .onDragEnd {
+                            self.isDragging = false
+                            noteVM.uiCallback?.actionOnDragEnd()
+                            NSCursor.openHand.set()
+                        }
+                        .background {
+                            RoundedRectangle(cornerSize: CGSize(width: 8, height: 8))
+                                .fill(draggerColor)
+                                .stroke(barColor, lineWidth: 1)
+                        }
                         .padding(.top, 0)
                         .frame(width: 40, height: 8)
                         .offset(y: 4)
@@ -74,7 +77,6 @@ struct NoteView: View {
                                 NSCursor.arrow.set()
                             }
                         }
-                        .gesture(drag)
                 }
                 Spacer()
                 HStack(spacing: noteVM.isMouseIgnored ? 0 : 8) {

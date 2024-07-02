@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		845A30892C1B269400834D65 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 845A30872C1B269400834D65 /* Localizable.strings */; };
 		845A308C2C1B26D000834D65 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 845A308A2C1B26D000834D65 /* Localizable.strings */; };
+		848F2B612C33CA1E0007A19D /* WinDragger in Frameworks */ = {isa = PBXBuildFile; productRef = 848F2B602C33CA1E0007A19D /* WinDragger */; };
 		84F83DF32C10A4D80094346C /* DeskNoteApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F83DF22C10A4D80094346C /* DeskNoteApp.swift */; };
 		84F83DF52C10A4D80094346C /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F83DF42C10A4D80094346C /* NoteView.swift */; };
 		84F83DF92C10A4DA0094346C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84F83DF82C10A4DA0094346C /* Assets.xcassets */; };
@@ -59,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				848F2B612C33CA1E0007A19D /* WinDragger in Frameworks */,
 				84F83E052C10B22F0094346C /* Tray in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -176,6 +178,7 @@
 			name = DeskNote;
 			packageProductDependencies = (
 				84F83E042C10B22F0094346C /* Tray */,
+				848F2B602C33CA1E0007A19D /* WinDragger */,
 			);
 			productName = DeskNote;
 			productReference = 84F83DEF2C10A4D80094346C /* DeskNote.app */;
@@ -208,6 +211,7 @@
 			mainGroup = 84F83DE62C10A4D80094346C;
 			packageReferences = (
 				84F83E032C10B22F0094346C /* XCLocalSwiftPackageReference "../../Github/Tray" */,
+				848F2B5F2C33CA1E0007A19D /* XCLocalSwiftPackageReference "../WinDragger" */,
 			);
 			productRefGroup = 84F83DF02C10A4D80094346C /* Products */;
 			projectDirPath = "";
@@ -403,7 +407,7 @@
 				CODE_SIGN_ENTITLEMENTS = DeskNote/DeskNote.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1001;
+				CURRENT_PROJECT_VERSION = 1002;
 				DEVELOPMENT_ASSET_PATHS = "\"DeskNote/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -432,7 +436,7 @@
 				CODE_SIGN_ENTITLEMENTS = DeskNote/DeskNote.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1001;
+				CURRENT_PROJECT_VERSION = 1002;
 				DEVELOPMENT_ASSET_PATHS = "\"DeskNote/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -477,6 +481,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
+		848F2B5F2C33CA1E0007A19D /* XCLocalSwiftPackageReference "../WinDragger" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../WinDragger;
+		};
 		84F83E032C10B22F0094346C /* XCLocalSwiftPackageReference "../../Github/Tray" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../../Github/Tray;
@@ -484,6 +492,10 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		848F2B602C33CA1E0007A19D /* WinDragger */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = WinDragger;
+		};
 		84F83E042C10B22F0094346C /* Tray */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Tray;

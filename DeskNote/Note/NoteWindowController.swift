@@ -49,9 +49,7 @@ class NoteWindowController: NSWindowController {
                 self.close()
                 NoteManager.shared.deleteNote(note: note)
             },
-            onDragMove: { move in
-                let origin = self.window?.frame.origin
-                self.window?.setFrameOrigin(NSPoint(x: origin!.x + move.width, y: origin!.y - move.height))
+            onDragStart: {
                 self.window?.hasShadow = true
             },
             onDragEnd: {
