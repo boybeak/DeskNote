@@ -10,6 +10,7 @@
 		845A30892C1B269400834D65 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 845A30872C1B269400834D65 /* Localizable.strings */; };
 		845A308C2C1B26D000834D65 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 845A308A2C1B26D000834D65 /* Localizable.strings */; };
 		848F2B612C33CA1E0007A19D /* WinDragger in Frameworks */ = {isa = PBXBuildFile; productRef = 848F2B602C33CA1E0007A19D /* WinDragger */; };
+		848F2B792C343BED0007A19D /* WinToEdge in Frameworks */ = {isa = PBXBuildFile; productRef = 848F2B782C343BED0007A19D /* WinToEdge */; };
 		84F83DF32C10A4D80094346C /* DeskNoteApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F83DF22C10A4D80094346C /* DeskNoteApp.swift */; };
 		84F83DF52C10A4D80094346C /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F83DF42C10A4D80094346C /* NoteView.swift */; };
 		84F83DF92C10A4DA0094346C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84F83DF82C10A4DA0094346C /* Assets.xcassets */; };
@@ -60,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				848F2B792C343BED0007A19D /* WinToEdge in Frameworks */,
 				848F2B612C33CA1E0007A19D /* WinDragger in Frameworks */,
 				84F83E052C10B22F0094346C /* Tray in Frameworks */,
 			);
@@ -179,6 +181,7 @@
 			packageProductDependencies = (
 				84F83E042C10B22F0094346C /* Tray */,
 				848F2B602C33CA1E0007A19D /* WinDragger */,
+				848F2B782C343BED0007A19D /* WinToEdge */,
 			);
 			productName = DeskNote;
 			productReference = 84F83DEF2C10A4D80094346C /* DeskNote.app */;
@@ -212,6 +215,7 @@
 			packageReferences = (
 				84F83E032C10B22F0094346C /* XCLocalSwiftPackageReference "../../Github/Tray" */,
 				848F2B5F2C33CA1E0007A19D /* XCLocalSwiftPackageReference "../WinDragger" */,
+				848F2B772C343BED0007A19D /* XCLocalSwiftPackageReference "../WinToEdge" */,
 			);
 			productRefGroup = 84F83DF02C10A4D80094346C /* Products */;
 			projectDirPath = "";
@@ -485,6 +489,10 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../WinDragger;
 		};
+		848F2B772C343BED0007A19D /* XCLocalSwiftPackageReference "../WinToEdge" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../WinToEdge;
+		};
 		84F83E032C10B22F0094346C /* XCLocalSwiftPackageReference "../../Github/Tray" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../../Github/Tray;
@@ -495,6 +503,10 @@
 		848F2B602C33CA1E0007A19D /* WinDragger */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = WinDragger;
+		};
+		848F2B782C343BED0007A19D /* WinToEdge */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = WinToEdge;
 		};
 		84F83E042C10B22F0094346C /* Tray */ = {
 			isa = XCSwiftPackageProductDependency;

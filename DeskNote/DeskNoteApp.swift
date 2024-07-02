@@ -25,7 +25,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
         
         tray = Tray.install(named: "TrayIcon") { tray in
-            //            tray.setView(content: NoteView())
             tray.setOnLeftClick(onClick: {
                 self.onNewNoteAction()
                 return true

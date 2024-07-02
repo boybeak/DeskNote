@@ -210,6 +210,8 @@ struct NoteView: View {
                     .background(.clear)
             }
             .onHover { hovering in
+                uiCallback.actionOnHover(hover: hovering)
+                
                 mainWorkItem?.cancel()
                 mainWorkItem = nil
                 if hovering {

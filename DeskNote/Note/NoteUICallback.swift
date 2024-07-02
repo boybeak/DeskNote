@@ -14,13 +14,15 @@ class NoteUICallback {
     private var onClose: (() -> Void)? = nil
     private var onDragStart: (() -> Void)? =  nil
     private var onDragEnd: (() -> Void)? = nil
+    private var onHover: ((_ hover: Bool) -> Void)? = nil
     
-    init(onMouseIgnore: ((_ ignored: Bool) -> Void)?, onPin: ((_ pin: Bool) -> Void)?, onClose: ( () -> Void)? = nil, onDragStart: (() -> Void)? = nil, onDragEnd: ( () -> Void)? = nil) {
+    init(onMouseIgnore: ((_ ignored: Bool) -> Void)?, onPin: ((_ pin: Bool) -> Void)?, onClose: (() -> Void)? = nil, onDragStart: (() -> Void)? = nil, onDragEnd: (() -> Void)? = nil, onHover: ((_ hover: Bool) -> Void)? = nil) {
         self.onMouseIgnore = onMouseIgnore
         self.onPin = onPin
         self.onClose = onClose
         self.onDragStart = onDragStart
         self.onDragEnd = onDragEnd
+        self.onHover = onHover
     }
     
     func actionOnMouseIgnore(ignore: Bool) {
@@ -38,5 +40,8 @@ class NoteUICallback {
     }
     func actionOnDragEnd() {
         onDragEnd?()
+    }
+    func actionOnHover(hover: Bool) {
+        onHover?(hover)
     }
 }

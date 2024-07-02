@@ -7,6 +7,7 @@
 
 import AppKit
 import SwiftUI
+import WinToEdge
 
 class NoteWindowController: NSWindowController {
     
@@ -57,6 +58,15 @@ class NoteWindowController: NSWindowController {
                 note.position = (self.window?.frame.origin ?? CGPoint()).toData()
                 note.screenName = self.window?.screen?.localizedName
                 NoteManager.shared.updateNote()
+                
+                self.window?.catchToEdge(edges: [.left, .right])
+            },
+            onHover: { hovering in
+                if hovering {
+                    self.window?.escapeFromEdge(edges: [.left, .right])
+                } else {
+                    self.window?.catchToEdge(edges: [.left, .right])
+                }
             }
         ))
 
