@@ -15,6 +15,8 @@ class NoteWindowController: NSWindowController {
     
     private var windowCloseCallback: ((_ controller: NoteWindowController) -> Void)? = nil
     
+    private var snapEdges: [WinToEdge.Edge] = [WinToEdge.Edge]()
+    
     convenience init(windowCloseCallback: @escaping (_ controller: NoteWindowController) -> Void) {
         let screenSize = NSScreen.main?.frame ?? NSRect(x: 0, y: 0, width: 800, height: 600)
         let window = NoteWindow(
@@ -29,7 +31,6 @@ class NoteWindowController: NSWindowController {
             defer: false
         )
 
-        window.title = "New Note"
         window.backgroundColor = .clear
         window.level = .normal
         
@@ -58,14 +59,14 @@ class NoteWindowController: NSWindowController {
                 note.position = (self.window?.frame.origin ?? CGPoint()).toData()
                 note.screenName = self.window?.screen?.localizedName
                 NoteManager.shared.updateNote()
-                
-                self.window?.catchToEdge(edges: [.left, .right])
             },
             onHover: { hovering in
                 if hovering {
-                    self.window?.escapeFromEdge(edges: [.left, .right])
+                    self.window?.escapeFromEdge(edges: self.snapEdges)
                 } else {
-                    self.window?.catchToEdge(edges: [.left, .right])
+                    self.snapEdges.removeAll()
+                    self.snapEdges.append(contentsOf: SettingsManager.shared.snapEdges)
+                    self.window?.snapToEdge(edges: self.snapEdges)
                 }
             }
         ))
@@ -74,6 +75,15 @@ class NoteWindowController: NSWindowController {
 
         window?.contentView = contentView
 
+    }
+    
+    func showNote(note: Note) {
+        window?.level = note.isPinned ? .floating : .normal
+        window?.ignoresMouseEvents = note.isMouseIgnoreEnabled
+        
+        show(at: note.position?.toPoint()) { point in
+            return note
+        }
     }
     
     func show(at: CGPoint? = nil, screenName: String? = nil, noteCreator: (_ window: NSWindow) -> Note) {

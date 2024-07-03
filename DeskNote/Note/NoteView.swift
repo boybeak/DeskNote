@@ -67,7 +67,7 @@ struct NoteView: View {
                                 .stroke(barColor, lineWidth: 1)
                         }
                         .padding(.top, 0)
-                        .frame(width: 40, height: 8)
+                        .frame(width: 64, height: 10)
                         .offset(y: 4)
                         .transition(.opacity)
                         .onHover { hovering in
@@ -210,8 +210,6 @@ struct NoteView: View {
                     .background(.clear)
             }
             .onHover { hovering in
-                uiCallback.actionOnHover(hover: hovering)
-                
                 mainWorkItem?.cancel()
                 mainWorkItem = nil
                 if hovering {

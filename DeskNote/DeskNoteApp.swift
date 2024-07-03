@@ -37,7 +37,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let quitMenuItem = NSMenuItem(title: NSLocalizedString("Menu_item_quit", comment: ""), action: #selector(onQuitAction), keyEquivalent: "")
         
         menu.addItem(newNoteMenuItem)
+        
+        menu.addItem(.separator())
+        
+        let edgeDockMenuItem = NSMenuItem(title: NSLocalizedString("Menu_item_edge_dock", comment: ""), action: nil, keyEquivalent: "")
+        
+        edgeDockMenuItem.submenu = SettingsManager.shared.edgeDockSubMenu
+        
+        menu.addItem(edgeDockMenuItem)
+        
+        menu.addItem(.separator())
+        
         menu.addItem(quitMenuItem)
+        
         tray.setMenu(menu: menu)
         
         showHistoryNotes(notes: NoteManager.shared.fetchAllNotes())
@@ -72,12 +84,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     private func showHistoryNotes(notes: [Note]) {
         notes.forEach { note in
-            let win = NoteWindowController { controller in
-                
-            }
-            win.show(at: note.position?.toPoint()) { point in
-                return note
-            }
+            let win = NoteWindowController { controller in}
+            win.showNote(note: note)
         }
     }
     

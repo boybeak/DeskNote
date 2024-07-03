@@ -11,6 +11,7 @@
 		845A308C2C1B26D000834D65 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 845A308A2C1B26D000834D65 /* Localizable.strings */; };
 		848F2B612C33CA1E0007A19D /* WinDragger in Frameworks */ = {isa = PBXBuildFile; productRef = 848F2B602C33CA1E0007A19D /* WinDragger */; };
 		848F2B792C343BED0007A19D /* WinToEdge in Frameworks */ = {isa = PBXBuildFile; productRef = 848F2B782C343BED0007A19D /* WinToEdge */; };
+		848F2B7B2C35357C0007A19D /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848F2B7A2C35357C0007A19D /* SettingsManager.swift */; };
 		84F83DF32C10A4D80094346C /* DeskNoteApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F83DF22C10A4D80094346C /* DeskNoteApp.swift */; };
 		84F83DF52C10A4D80094346C /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F83DF42C10A4D80094346C /* NoteView.swift */; };
 		84F83DF92C10A4DA0094346C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84F83DF82C10A4DA0094346C /* Assets.xcassets */; };
@@ -35,6 +36,7 @@
 		845A30882C1B269400834D65 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = Localizable.strings; sourceTree = "<group>"; };
 		845A308B2C1B26D000834D65 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		845A308D2C1B2C1100834D65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		848F2B7A2C35357C0007A19D /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
 		84F83DEF2C10A4D80094346C /* DeskNote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeskNote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84F83DF22C10A4D80094346C /* DeskNoteApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeskNoteApp.swift; sourceTree = "<group>"; };
 		84F83DF42C10A4D80094346C /* NoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 				84F83DFD2C10A4DA0094346C /* DeskNote.entitlements */,
 				84F83DFA2C10A4DA0094346C /* Preview Content */,
 				84F83E332C199CE70094346C /* DeskNote.xcdatamodeld */,
+				848F2B7A2C35357C0007A19D /* SettingsManager.swift */,
 			);
 			path = DeskNote;
 			sourceTree = "<group>";
@@ -257,6 +260,7 @@
 				84F83E352C199CE70094346C /* DeskNote.xcdatamodeld in Sources */,
 				84F83E272C17104C0094346C /* ColorPalette.swift in Sources */,
 				84F83E212C15DE120094346C /* NoteUICallback.swift in Sources */,
+				848F2B7B2C35357C0007A19D /* SettingsManager.swift in Sources */,
 				84F83E0B2C12AA930094346C /* NoteWindowController.swift in Sources */,
 				84F83E232C15EA080094346C /* PaletteView.swift in Sources */,
 				84F83E1C2C15B47B0094346C /* CircularProgressView.swift in Sources */,
@@ -411,7 +415,7 @@
 				CODE_SIGN_ENTITLEMENTS = DeskNote/DeskNote.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1002;
+				CURRENT_PROJECT_VERSION = 1100;
 				DEVELOPMENT_ASSET_PATHS = "\"DeskNote/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -424,7 +428,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.0.02;
+				MARKETING_VERSION = 1.1.00;
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.boybeak.DeskNote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -440,7 +444,7 @@
 				CODE_SIGN_ENTITLEMENTS = DeskNote/DeskNote.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1002;
+				CURRENT_PROJECT_VERSION = 1100;
 				DEVELOPMENT_ASSET_PATHS = "\"DeskNote/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -453,7 +457,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.0.02;
+				MARKETING_VERSION = 1.1.00;
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.boybeak.DeskNote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

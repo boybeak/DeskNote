@@ -127,13 +127,9 @@ class NoteVM: ObservableObject {
         isMouseIgnoredEnable ? "cursorarrow.slash" : "cursorarrow"
     }
     
-    var isCursorHovering: Bool {
-        return isHoveringInMainPanel || isHoveringInConfigPanel || isHoveringInDeletePanel
-    }
-    
-    @Published var isHoveringInMainPanel: Bool = false {
+    var isCursorHovering: Bool = false {
         didSet {
-            if oldValue != isHoveringInMainPanel {
+            if oldValue != isCursorHovering {
                 if isCursorHovering {
                     withAnimation {
                         iconColor = fontColor
@@ -143,7 +139,17 @@ class NoteVM: ObservableObject {
                         iconColor = iconHintColor
                     }
                 }
+                uiCallback?.actionOnHover(hover: isCursorHovering)
+            }
+        }
+    }
+    
+    @Published var isHoveringInMainPanel: Bool = false {
+        didSet {
+            if oldValue != isHoveringInMainPanel {
                 refreshBackgroundColor()
+                
+                isCursorHovering = computeIsHovering()
             }
         }
     }
@@ -151,6 +157,8 @@ class NoteVM: ObservableObject {
         didSet {
             if (oldValue != isHoveringInConfigPanel) {
                 refreshBackgroundColor()
+                
+                isCursorHovering = computeIsHovering()
             }
         }
     }
@@ -159,6 +167,8 @@ class NoteVM: ObservableObject {
         didSet {
             if (oldValue != isHoveringInDeletePanel) {
                 refreshBackgroundColor()
+                
+                isCursorHovering = computeIsHovering()
             }
         }
     }
@@ -234,6 +244,10 @@ class NoteVM: ObservableObject {
         self.refreshBackgroundColor()
         
         isInitialized = true
+    }
+    
+    private func computeIsHovering()-> Bool {
+        return isHoveringInMainPanel || isHoveringInConfigPanel || isHoveringInDeletePanel
     }
     
     private func refreshBackgroundColor() {

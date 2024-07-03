@@ -5,4 +5,8 @@
 "Button_yes" = "Yes";
 
 "Menu_item_new_note" = "New Note";
+"Menu_item_edge_dock" = "Edge Docking";
+"Menu_item_edge_dock_left" = "Left";
+"Menu_item_edge_dock_right" = "Right";
+"Menu_item_edge_dock_bottom" = "Bottom";
 "Menu_item_quit" = "Quit";
