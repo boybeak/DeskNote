@@ -15,7 +15,10 @@ class NoteWindowController: NSWindowController {
     
     private var windowCloseCallback: ((_ controller: NoteWindowController) -> Void)? = nil
     
-    private var snapEdges: [WinToEdge.Edge] = [WinToEdge.Edge]()
+    private var snapEdges: [WinToEdge.EdgePosition] = [WinToEdge.EdgePosition]()
+    
+    private var edgeId: UUID? = nil
+    private var legacyId: UUID? = nil
     
     convenience init(windowCloseCallback: @escaping (_ controller: NoteWindowController) -> Void) {
         let screenSize = NSScreen.main?.frame ?? NSRect(x: 0, y: 0, width: 800, height: 600)
@@ -37,6 +40,31 @@ class NoteWindowController: NSWindowController {
         self.init(window: window)
         
         self.windowCloseCallback = windowCloseCallback
+        
+        edgeId = SettingsManager.shared.registerDockEdgesCallback { edge, enable in
+            if enable {
+                self.doSnap()
+            } else {
+                self.undoSnap()
+            }
+        }
+        legacyId = SettingsManager.shared.registerLegacyCallback { legacy in
+            self.doSnap()
+        }
+        
+        DispatchQueue.main.async {
+            self.doSnap()
+        }
+    }
+    
+    private func doSnap() {
+        self.snapEdges.removeAll()
+        self.snapEdges.append(contentsOf: SettingsManager.shared.snapEdges)
+        self.window?.snapToEdge(edges: self.snapEdges, legacy: CGFloat(SettingsManager.shared.legacy))
+    }
+    
+    private func undoSnap() {
+        self.window?.escapeFromEdge(edges: self.snapEdges)
     }
     
     private func bindNoteView(note: Note) {
@@ -62,11 +90,9 @@ class NoteWindowController: NSWindowController {
             },
             onHover: { hovering in
                 if hovering {
-                    self.window?.escapeFromEdge(edges: self.snapEdges)
+                    self.undoSnap()
                 } else {
-                    self.snapEdges.removeAll()
-                    self.snapEdges.append(contentsOf: SettingsManager.shared.snapEdges)
-                    self.window?.snapToEdge(edges: self.snapEdges)
+                    self.doSnap()
                 }
             }
         ))
@@ -106,7 +132,9 @@ class NoteWindowController: NSWindowController {
         }
         let note = noteCreator(window!)
         bindNoteView(note: note)
-        showWindow(nil)
+
+        showWindow(self)
+        window?.makeKeyAndOrderFront(nil)
     }
     
     func showAccordingTo(window: NSWindow, noteCreator: (_ window: NSWindow) -> Note)-> CGPoint {
@@ -126,6 +154,13 @@ class NoteWindowController: NSWindowController {
     }
     
     override func close() {
+        if let edgeId = self.edgeId {
+            SettingsManager.shared.unregisterDockEdgesCallback(id: edgeId)
+        }
+        if let legacyId = self.legacyId {
+            SettingsManager.shared.unregisterLegacyCallback(id: legacyId)
+        }
+        
         windowCloseCallback?(self)
         windowCloseCallback = nil
         super.close()

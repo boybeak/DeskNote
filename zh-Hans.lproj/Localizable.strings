@@ -6,7 +6,15 @@
 
 "Menu_item_new_note" = "新建笔记";
 "Menu_item_edge_dock" = "边缘吸附";
+
+"Menu_section_header_edge" = "方向";
 "Menu_item_edge_dock_left" = "左侧";
 "Menu_item_edge_dock_right" = "右侧";
 "Menu_item_edge_dock_bottom" = "底部";
+
+"Menu_section_header_legacy" = "余量";
+"Menu_item_legacy_small" = "小";
+"Menu_item_legacy_medium" = "中";
+"Menu_item_legacy_large" = "大";
+
 "Menu_item_quit" = "退出";

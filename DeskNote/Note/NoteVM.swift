@@ -139,6 +139,7 @@ class NoteVM: ObservableObject {
                         iconColor = iconHintColor
                     }
                 }
+                refreshBackgroundColor()
                 uiCallback?.actionOnHover(hover: isCursorHovering)
             }
         }
@@ -255,14 +256,14 @@ class NoteVM: ObservableObject {
     }
     
     private func computeBackgroundColor()-> Color {
-        return if alphaUnhoverOnly {
+        if alphaUnhoverOnly {
             if isCursorHovering && !isGlobalAlphaEditing {
-                bgColor
+                return bgColor
             } else {
-                bgColor.opacity(globalAlpha)
+                return bgColor.opacity(globalAlpha)
             }
         } else {
-            bgColor.opacity(globalAlpha)
+            return bgColor.opacity(globalAlpha)
         }
     }
     

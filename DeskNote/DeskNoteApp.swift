@@ -42,7 +42,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         let edgeDockMenuItem = NSMenuItem(title: NSLocalizedString("Menu_item_edge_dock", comment: ""), action: nil, keyEquivalent: "")
         
-        edgeDockMenuItem.submenu = SettingsManager.shared.edgeDockSubMenu
+        edgeDockMenuItem.submenu = SettingsManager.shared.edgeSubMenu
         
         menu.addItem(edgeDockMenuItem)
         
