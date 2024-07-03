@@ -428,7 +428,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.1.00;
+				MARKETING_VERSION = 1.2.00;
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.boybeak.DeskNote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -457,7 +457,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.1.00;
+				MARKETING_VERSION = 1.2.00;
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.boybeak.DeskNote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
