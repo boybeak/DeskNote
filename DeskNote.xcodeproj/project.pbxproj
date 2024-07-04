@@ -12,6 +12,7 @@
 		848F2B612C33CA1E0007A19D /* WinDragger in Frameworks */ = {isa = PBXBuildFile; productRef = 848F2B602C33CA1E0007A19D /* WinDragger */; };
 		848F2B792C343BED0007A19D /* WinToEdge in Frameworks */ = {isa = PBXBuildFile; productRef = 848F2B782C343BED0007A19D /* WinToEdge */; };
 		848F2B7B2C35357C0007A19D /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848F2B7A2C35357C0007A19D /* SettingsManager.swift */; };
+		848F2B7D2C366EDC0007A19D /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848F2B7C2C366EDC0007A19D /* TestView.swift */; };
 		84F83DF32C10A4D80094346C /* DeskNoteApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F83DF22C10A4D80094346C /* DeskNoteApp.swift */; };
 		84F83DF52C10A4D80094346C /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F83DF42C10A4D80094346C /* NoteView.swift */; };
 		84F83DF92C10A4DA0094346C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84F83DF82C10A4DA0094346C /* Assets.xcassets */; };
@@ -37,6 +38,7 @@
 		845A308B2C1B26D000834D65 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		845A308D2C1B2C1100834D65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		848F2B7A2C35357C0007A19D /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
+		848F2B7C2C366EDC0007A19D /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		84F83DEF2C10A4D80094346C /* DeskNote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeskNote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84F83DF22C10A4D80094346C /* DeskNoteApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeskNoteApp.swift; sourceTree = "<group>"; };
 		84F83DF42C10A4D80094346C /* NoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				84F83E192C159DDE0094346C /* CountdownTimer.swift */,
 				84F83E262C17104C0094346C /* ColorPalette.swift */,
 				84F83E2B2C18987C0094346C /* ColorUtils.swift */,
+				848F2B7C2C366EDC0007A19D /* TestView.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -256,6 +259,7 @@
 				84F83DF52C10A4D80094346C /* NoteView.swift in Sources */,
 				84F83E252C15EA310094346C /* ConfigView.swift in Sources */,
 				84F83E2A2C1887930094346C /* Note.swift in Sources */,
+				848F2B7D2C366EDC0007A19D /* TestView.swift in Sources */,
 				84F83DF32C10A4D80094346C /* DeskNoteApp.swift in Sources */,
 				84F83E352C199CE70094346C /* DeskNote.xcdatamodeld in Sources */,
 				84F83E272C17104C0094346C /* ColorPalette.swift in Sources */,

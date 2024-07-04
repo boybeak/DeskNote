@@ -26,7 +26,9 @@ struct ConfigView: View {
     
     var body: some View {
         VStack {
-            Text("Config_title_background").font(.title3)
+            Text("Config_title_background")
+                .bold()
+                .font(.title3)
             PaletteView(palette: ConfigView.bgPalette) { index in
                 withAnimation {
                     bgColor = ConfigView.bgPalette[index]
@@ -43,17 +45,17 @@ struct ConfigView: View {
             )
             .controlSize(.mini)
             .frame(minWidth: 0, maxWidth: .infinity)
-            ColorPicker("", selection: $bgColor)
-                .frame(width: 24, height: 24)
-                .overlay {
-                    Circle().fill(.clear)
-                }
+
             Toggle(isOn: $alphaUnactiveOnly) {
                 Text("Config_alpha_unhover_only")
             }
             .toggleStyle(.checkbox)
+            
             Divider()
-            Text("Config_title_font").font(.title3)
+            
+            Text("Config_title_font")
+                .bold()
+                .font(.title3)
             PaletteView(palette: ConfigView.fontPalette) { index in
                 withAnimation {
                     fontColor = ConfigView.fontPalette[index]
@@ -74,10 +76,9 @@ struct ConfigView: View {
                 .frame(width: 24, height: 24)
                 .toggleStyle(.button)
             }
-            
         }
-        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-        .padding(.all, 16)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding(.all, 8)
         .onHover { hovering in
             workItem?.cancel()
             workItem = nil
@@ -97,4 +98,5 @@ struct ConfigView: View {
             
         }
     }
+    
 }

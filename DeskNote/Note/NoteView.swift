@@ -66,8 +66,7 @@ struct NoteView: View {
                                 .fill(draggerColor)
                                 .stroke(barColor, lineWidth: 1)
                         }
-                        .padding(.top, 0)
-                        .frame(width: 64, height: 10)
+                        .frame(width: 64, height: 8)
                         .offset(y: 4)
                         .transition(.opacity)
                         .onHover { hovering in
@@ -91,6 +90,7 @@ struct NoteView: View {
                                 }
                             }
                             .popover(isPresented: $noteVM.isConfigPanelShowing) {
+                                
                                 ConfigView(
                                     noteVM: self.noteVM,
                                     bgColor: $noteVM.bgColor,
@@ -101,6 +101,8 @@ struct NoteView: View {
                                     isBold: $noteVM.isBold, 
                                     isItalic: $noteVM.isItalic
                                 )
+                        
+//                                TestView()
                             }
                             .onTapGesture {
                                 withAnimation {
