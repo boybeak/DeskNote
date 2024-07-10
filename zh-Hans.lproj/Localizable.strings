@@ -5,6 +5,7 @@
 "Button_yes" = "是的";
 
 "Menu_item_new_note" = "新建笔记";
+"Menu_item_launch_at_login" = "开机自启动";
 "Menu_item_edge_dock" = "边缘吸附";
 
 "Menu_section_header_edge" = "方向";

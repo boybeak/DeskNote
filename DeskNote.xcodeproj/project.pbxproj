@@ -12,7 +12,7 @@
 		848F2B612C33CA1E0007A19D /* WinDragger in Frameworks */ = {isa = PBXBuildFile; productRef = 848F2B602C33CA1E0007A19D /* WinDragger */; };
 		848F2B792C343BED0007A19D /* WinToEdge in Frameworks */ = {isa = PBXBuildFile; productRef = 848F2B782C343BED0007A19D /* WinToEdge */; };
 		848F2B7B2C35357C0007A19D /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848F2B7A2C35357C0007A19D /* SettingsManager.swift */; };
-		848F2B7D2C366EDC0007A19D /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848F2B7C2C366EDC0007A19D /* TestView.swift */; };
+		848F2B802C3E7EED0007A19D /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 848F2B7F2C3E7EED0007A19D /* LaunchAtLogin */; };
 		84F83DF32C10A4D80094346C /* DeskNoteApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F83DF22C10A4D80094346C /* DeskNoteApp.swift */; };
 		84F83DF52C10A4D80094346C /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F83DF42C10A4D80094346C /* NoteView.swift */; };
 		84F83DF92C10A4DA0094346C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84F83DF82C10A4DA0094346C /* Assets.xcassets */; };
@@ -38,7 +38,6 @@
 		845A308B2C1B26D000834D65 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		845A308D2C1B2C1100834D65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		848F2B7A2C35357C0007A19D /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
-		848F2B7C2C366EDC0007A19D /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		84F83DEF2C10A4D80094346C /* DeskNote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeskNote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84F83DF22C10A4D80094346C /* DeskNoteApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeskNoteApp.swift; sourceTree = "<group>"; };
 		84F83DF42C10A4D80094346C /* NoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
@@ -67,6 +66,7 @@
 			files = (
 				848F2B792C343BED0007A19D /* WinToEdge in Frameworks */,
 				848F2B612C33CA1E0007A19D /* WinDragger in Frameworks */,
+				848F2B802C3E7EED0007A19D /* LaunchAtLogin in Frameworks */,
 				84F83E052C10B22F0094346C /* Tray in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -153,7 +153,6 @@
 				84F83E192C159DDE0094346C /* CountdownTimer.swift */,
 				84F83E262C17104C0094346C /* ColorPalette.swift */,
 				84F83E2B2C18987C0094346C /* ColorUtils.swift */,
-				848F2B7C2C366EDC0007A19D /* TestView.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -188,6 +187,7 @@
 				84F83E042C10B22F0094346C /* Tray */,
 				848F2B602C33CA1E0007A19D /* WinDragger */,
 				848F2B782C343BED0007A19D /* WinToEdge */,
+				848F2B7F2C3E7EED0007A19D /* LaunchAtLogin */,
 			);
 			productName = DeskNote;
 			productReference = 84F83DEF2C10A4D80094346C /* DeskNote.app */;
@@ -222,6 +222,7 @@
 				84F83E032C10B22F0094346C /* XCLocalSwiftPackageReference "../../Github/Tray" */,
 				848F2B5F2C33CA1E0007A19D /* XCLocalSwiftPackageReference "../WinDragger" */,
 				848F2B772C343BED0007A19D /* XCLocalSwiftPackageReference "../WinToEdge" */,
+				848F2B7E2C3E7EED0007A19D /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */,
 			);
 			productRefGroup = 84F83DF02C10A4D80094346C /* Products */;
 			projectDirPath = "";
@@ -259,7 +260,6 @@
 				84F83DF52C10A4D80094346C /* NoteView.swift in Sources */,
 				84F83E252C15EA310094346C /* ConfigView.swift in Sources */,
 				84F83E2A2C1887930094346C /* Note.swift in Sources */,
-				848F2B7D2C366EDC0007A19D /* TestView.swift in Sources */,
 				84F83DF32C10A4D80094346C /* DeskNoteApp.swift in Sources */,
 				84F83E352C199CE70094346C /* DeskNote.xcdatamodeld in Sources */,
 				84F83E272C17104C0094346C /* ColorPalette.swift in Sources */,
@@ -432,7 +432,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.2.00;
+				MARKETING_VERSION = 1.3.00;
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.boybeak.DeskNote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -461,7 +461,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.2.00;
+				MARKETING_VERSION = 1.3.00;
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.boybeak.DeskNote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -507,6 +507,17 @@
 		};
 /* End XCLocalSwiftPackageReference section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		848F2B7E2C3E7EED0007A19D /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/LaunchAtLogin-Modern";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		848F2B602C33CA1E0007A19D /* WinDragger */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -515,6 +526,11 @@
 		848F2B782C343BED0007A19D /* WinToEdge */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = WinToEdge;
+		};
+		848F2B7F2C3E7EED0007A19D /* LaunchAtLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 848F2B7E2C3E7EED0007A19D /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */;
+			productName = LaunchAtLogin;
 		};
 		84F83E042C10B22F0094346C /* Tray */ = {
 			isa = XCSwiftPackageProductDependency;

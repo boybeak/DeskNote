@@ -5,6 +5,7 @@
 "Button_yes" = "Yes";
 
 "Menu_item_new_note" = "New Note";
+"Menu_item_launch_at_login" = "Launch at login";
 "Menu_item_edge_dock" = "Edge Docking";
 
 "Menu_section_header_edge" = "Edges";

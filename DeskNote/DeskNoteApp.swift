@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftData
 import Tray
+import LaunchAtLogin
 
 @main
 struct DeskNoteApp: App {
@@ -34,6 +35,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let menu = NSMenu()
         
         let newNoteMenuItem = NSMenuItem(title: NSLocalizedString("Menu_item_new_note", comment: ""), action: #selector(onNewNoteAction), keyEquivalent: "")
+        
+        let launchAtLoginMenuItem = NSMenuItem(title: NSLocalizedString("Menu_item_launch_at_login", comment: ""), action: #selector(onLaunchAtLoginToggle), keyEquivalent: "")
+        launchAtLoginMenuItem.state = LaunchAtLogin.isEnabled ? .on : .off
+        
         let quitMenuItem = NSMenuItem(title: NSLocalizedString("Menu_item_quit", comment: ""), action: #selector(onQuitAction), keyEquivalent: "")
         
         menu.addItem(newNoteMenuItem)
@@ -45,6 +50,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         edgeDockMenuItem.submenu = SettingsManager.shared.edgeSubMenu
         
         menu.addItem(edgeDockMenuItem)
+        menu.addItem(launchAtLoginMenuItem)
         
         menu.addItem(.separator())
         
@@ -86,6 +92,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         notes.forEach { note in
             let win = NoteWindowController { controller in}
             win.showNote(note: note)
+        }
+    }
+    
+    @objc func onLaunchAtLoginToggle(sender: Any) {
+        if let menuItem = sender as? NSMenuItem {
+            LaunchAtLogin.isEnabled = !LaunchAtLogin.isEnabled
+            menuItem.state = LaunchAtLogin.isEnabled ? .on : .off
         }
     }
     
