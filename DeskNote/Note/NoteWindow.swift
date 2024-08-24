@@ -9,8 +9,6 @@ import AppKit
 
 class NoteWindow: NSWindow {
     
-    
-    
     override var canBecomeKey: Bool {
         return true
     }
