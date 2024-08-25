@@ -37,20 +37,17 @@ struct NoteView: View {
     // MARK: -Body
     var body: some View {
         ZStack(alignment: .top) {
-            ScrollView {
-                TextEditor(text: $noteVM.text)
-                    .font(.system(size: noteVM.fontSize))
-                    .bold(noteVM.isBold)
-                    .italic(noteVM.isItalic)
-                    .foregroundColor(noteVM.getFontColor())
-                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-                    .safeAreaPadding(.vertical, 16)
-                    .safeAreaPadding(.horizontal, 8)
-                    .scrollContentBackground(.hidden)
-                    .background(.clear)
-                    .scrollDisabled(true)
-            }
-            .scrollIndicators(.never)
+            TextEditor(text: $noteVM.text)
+                .scrollIndicators(.never)
+                .font(.system(size: noteVM.fontSize))
+                .bold(noteVM.isBold)
+                .italic(noteVM.isItalic)
+                .foregroundColor(noteVM.getFontColor())
+                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+                .safeAreaPadding(.vertical, 16)
+                .safeAreaPadding(.horizontal, 8)
+                .scrollContentBackground(.hidden)
+                .background(.clear)
             
             VStack {
                 if noteVM.isCursorHovering && !noteVM.isMouseIgnored {
