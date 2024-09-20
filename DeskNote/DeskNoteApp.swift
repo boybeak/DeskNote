@@ -9,13 +9,16 @@ import SwiftUI
 import SwiftData
 import Tray
 import LaunchAtLogin
+import NoLaunchWin
 
 @main
 struct DeskNoteApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var app: AppDelegate
 
     var body: some Scene {
-        Settings {}
+        WindowGroup {
+            NoLaunchWinView()
+        }
     }
 }
 

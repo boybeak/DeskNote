@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8450C9D02C9D36200028DDA1 /* NoLaunchWin in Frameworks */ = {isa = PBXBuildFile; productRef = 8450C9CF2C9D36200028DDA1 /* NoLaunchWin */; };
 		845A30892C1B269400834D65 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 845A30872C1B269400834D65 /* Localizable.strings */; };
 		845A308C2C1B26D000834D65 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 845A308A2C1B26D000834D65 /* Localizable.strings */; };
 		848F2B612C33CA1E0007A19D /* WinDragger in Frameworks */ = {isa = PBXBuildFile; productRef = 848F2B602C33CA1E0007A19D /* WinDragger */; };
@@ -66,6 +67,7 @@
 			files = (
 				848F2B792C343BED0007A19D /* WinToEdge in Frameworks */,
 				848F2B612C33CA1E0007A19D /* WinDragger in Frameworks */,
+				8450C9D02C9D36200028DDA1 /* NoLaunchWin in Frameworks */,
 				848F2B802C3E7EED0007A19D /* LaunchAtLogin in Frameworks */,
 				84F83E052C10B22F0094346C /* Tray in Frameworks */,
 			);
@@ -188,6 +190,7 @@
 				848F2B602C33CA1E0007A19D /* WinDragger */,
 				848F2B782C343BED0007A19D /* WinToEdge */,
 				848F2B7F2C3E7EED0007A19D /* LaunchAtLogin */,
+				8450C9CF2C9D36200028DDA1 /* NoLaunchWin */,
 			);
 			productName = DeskNote;
 			productReference = 84F83DEF2C10A4D80094346C /* DeskNote.app */;
@@ -223,6 +226,7 @@
 				848F2B5F2C33CA1E0007A19D /* XCLocalSwiftPackageReference "../WinDragger" */,
 				848F2B772C343BED0007A19D /* XCLocalSwiftPackageReference "../WinToEdge" */,
 				848F2B7E2C3E7EED0007A19D /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */,
+				8450C9CE2C9D36200028DDA1 /* XCRemoteSwiftPackageReference "NoLaunchWin" */,
 			);
 			productRefGroup = 84F83DF02C10A4D80094346C /* Products */;
 			projectDirPath = "";
@@ -432,7 +436,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.3.02;
+				MARKETING_VERSION = 1.3.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.boybeak.DeskNote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -461,7 +465,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.3.02;
+				MARKETING_VERSION = 1.3.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.boybeak.DeskNote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -508,6 +512,14 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		8450C9CE2C9D36200028DDA1 /* XCRemoteSwiftPackageReference "NoLaunchWin" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/boybeak/NoLaunchWin.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.1;
+			};
+		};
 		848F2B7E2C3E7EED0007A19D /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sindresorhus/LaunchAtLogin-Modern";
@@ -519,6 +531,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		8450C9CF2C9D36200028DDA1 /* NoLaunchWin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8450C9CE2C9D36200028DDA1 /* XCRemoteSwiftPackageReference "NoLaunchWin" */;
+			productName = NoLaunchWin;
+		};
 		848F2B602C33CA1E0007A19D /* WinDragger */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = WinDragger;

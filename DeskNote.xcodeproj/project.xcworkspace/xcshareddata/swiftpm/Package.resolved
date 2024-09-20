@@ -1,5 +1,5 @@
 {
-  "originHash" : "0ed901185855725f5ed843e38575b83c6511c415358b949e455a82697d678970",
+  "originHash" : "df31889941f022babd7e42db6e4aa3f0832ef9d3688dded1828079be4373cf5e",
   "pins" : [
     {
       "identity" : "launchatlogin-modern",
@@ -8,6 +8,15 @@
       "state" : {
         "branch" : "main",
         "revision" : "a04ec1c363be3627734f6dad757d82f5d4fa8fcc"
+      }
+    },
+    {
+      "identity" : "nolaunchwin",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/boybeak/NoLaunchWin.git",
+      "state" : {
+        "revision" : "8114836b96375ffe24740bd9c503ca1b0a57324d",
+        "version" : "0.0.1"
       }
     }
   ],
