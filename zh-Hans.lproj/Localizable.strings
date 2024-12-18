@@ -18,4 +18,5 @@
 "Menu_item_legacy_medium" = "中";
 "Menu_item_legacy_large" = "大";
 
+"Menu_item_version_check" = "新版本: %@";
 "Menu_item_quit" = "退出";

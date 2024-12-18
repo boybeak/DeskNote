@@ -10,6 +10,7 @@ import SwiftData
 import Tray
 import LaunchAtLogin
 import NoLaunchWin
+import GithubReleaseChecker
 
 @main
 struct DeskNoteApp: App {
@@ -25,6 +26,10 @@ struct DeskNoteApp: App {
 class AppDelegate: NSObject, NSApplicationDelegate {
     
     private var tray: Tray!
+    
+    private let checker = GithubReleaseChecker()
+    private let versionCheckItem = NSMenuItem(title: NSLocalizedString("Menu_item_version_check", comment: ""), action: #selector(checkVersion), keyEquivalent: "")
+    private var newVersion: ReleaseInfo? = nil
     
     func applicationDidFinishLaunching(_ notification: Notification) {
         
@@ -42,6 +47,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let launchAtLoginMenuItem = NSMenuItem(title: NSLocalizedString("Menu_item_launch_at_login", comment: ""), action: #selector(onLaunchAtLoginToggle), keyEquivalent: "")
         launchAtLoginMenuItem.state = LaunchAtLogin.isEnabled ? .on : .off
         
+        
+        versionCheckItem.isHidden = true
+        
         let quitMenuItem = NSMenuItem(title: NSLocalizedString("Menu_item_quit", comment: ""), action: #selector(onQuitAction), keyEquivalent: "")
         
         menu.addItem(newNoteMenuItem)
@@ -57,11 +65,26 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         menu.addItem(.separator())
         
+        menu.addItem(versionCheckItem)
         menu.addItem(quitMenuItem)
         
         tray.setMenu(menu: menu)
         
         showHistoryNotes(notes: NoteManager.shared.fetchAllNotes())
+        
+        checker.checkUpdate(for: .userRepo("boybeak/DeskNote")) { (res: Result<(newVersion: ReleaseInfo, hasUpdate: Bool), any Error>) in
+            switch(res) {
+            case .success((let newVersion, let hasUpdate)):
+                self.versionCheckItem.isHidden = !hasUpdate
+                self.versionCheckItem.title = String(format: NSLocalizedString("Menu_item_version_check", comment: ""), newVersion.tagName)
+                if hasUpdate {
+                    self.newVersion = newVersion
+                }
+            case .failure(_):
+                self.versionCheckItem.isHidden = true
+                self.newVersion = nil
+            }
+        }
     }
     
     @objc func onNewNoteAction() {
@@ -102,6 +125,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if let menuItem = sender as? NSMenuItem {
             LaunchAtLogin.isEnabled = !LaunchAtLogin.isEnabled
             menuItem.state = LaunchAtLogin.isEnabled ? .on : .off
+        }
+    }
+    
+    @objc func checkVersion() {
+        if let newVersion = self.newVersion, let url = URL(string: newVersion.htmlUrl) {
+            NSWorkspace.shared.open(url)
         }
     }
     

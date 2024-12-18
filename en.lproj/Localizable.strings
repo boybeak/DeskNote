@@ -18,4 +18,5 @@
 "Menu_item_legacy_medium" = "Medium";
 "Menu_item_legacy_large" = "Large";
 
+"Menu_item_version_check" = "New version: %@";
 "Menu_item_quit" = "Quit";

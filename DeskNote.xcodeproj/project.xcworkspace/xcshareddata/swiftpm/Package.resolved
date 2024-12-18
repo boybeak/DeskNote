@@ -1,6 +1,15 @@
 {
-  "originHash" : "df31889941f022babd7e42db6e4aa3f0832ef9d3688dded1828079be4373cf5e",
+  "originHash" : "5adb9c6026b21b2b556a659809614368c2cf089d1d7e90e34e37b071db74d397",
   "pins" : [
+    {
+      "identity" : "githubreleasechecker",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/boybeak/GithubReleaseChecker.git",
+      "state" : {
+        "revision" : "bf654544f74588f7e80bfda198b5400b746d54c9",
+        "version" : "0.0.2"
+      }
+    },
     {
       "identity" : "launchatlogin-modern",
       "kind" : "remoteSourceControl",
@@ -16,6 +25,15 @@
       "location" : "https://github.com/boybeak/NoLaunchWin.git",
       "state" : {
         "revision" : "8114836b96375ffe24740bd9c503ca1b0a57324d",
+        "version" : "0.0.1"
+      }
+    },
+    {
+      "identity" : "swiftuiwindow",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/boybeak/SwiftUIWindow.git",
+      "state" : {
+        "revision" : "e7d0d194a06b3de48bafda630864c80d8fe6df08",
         "version" : "0.0.1"
       }
     }
